@@ -1,0 +1,29 @@
+.search_bar {
+    display: flex;
+
+    background: rgba(0, 0, 0, 0.46);
+    width: 380px;
+    height: 50px;
+    border-radius: 10px;
+
+    input {
+        border: none;
+        outline: none;
+        background: none;
+    }
+
+}
+
+.search_btn {
+    border: none;
+    background: none;
+}
+
+input[placeholder] {
+    font-size: 25px;
+    font-family: 'Katibeh', serif;
+}
+
+::-webkit-input-placeholder {
+    color: #ffff;
+}
