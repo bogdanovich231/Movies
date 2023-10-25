@@ -5,11 +5,15 @@ export default interface IMovie {
     poster_path: string;
     release_date: string;
     vote_average: number;
+    id: number;
+    popularity: number;
+
 }
 
-export async function searchMovie() {
+export async function searchMovie(query: string): Promise<IMovie | undefined> {
     try {
-        const res = await fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US',
+        const encodeQuery = encodeURIComponent(query);
+        const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeQuery}&include_adult=false&language=en-US&page=1`,
             {
                 method: 'GET',
                 headers: {
@@ -19,6 +23,7 @@ export async function searchMovie() {
             });
         const result = await res.json();
         console.log(result);
+        return result;
     } catch (error) {
         console.error('Error in search books: ', error)
     }
