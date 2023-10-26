@@ -1,18 +1,20 @@
-import "./ProductElement.scss"
-import photo from "../assets/background.jpg"
-function ProductElement() {
+import "./ProductElement.scss";
+import IMovie from "../Api/Api";
+
+function ProductElement({ movie }: { movie: IMovie }) {
+    console.log("Product elem", movie)
     return (
         <div className="product">
             <div className="img">
-                <img src={photo} alt="" />
+                <img src={movie.poster_path} alt="" />
             </div>
             <div className="information">
-                <h3>Name</h3>
+                <h3>{movie.title}</h3>
                 <p className="description">
-                    Описание фильма короткое .
+                    {movie.overview}
                 </p>
                 <p className="release_date">
-                    15.02.2023
+                    {movie.release_date}
                 </p>
             </div>
         </div>
