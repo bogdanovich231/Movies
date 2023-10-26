@@ -3,7 +3,11 @@ import ProductElement from "../ProductElement/ProductElement";
 import "./CatalogProducts.scss";
 
 function CatalogProducts({ searchResults }: { searchResults: IMovie[] }) {
-    console.log("catalog", searchResults)
+    console.log("catalog", searchResults);
+
+    if (searchResults.length === 0) {
+        return <div>Results not found</div>;
+    }
 
     return (
         <div className="catalog">
@@ -14,4 +18,4 @@ function CatalogProducts({ searchResults }: { searchResults: IMovie[] }) {
     )
 }
 
-export default CatalogProducts
+export default CatalogProducts;
