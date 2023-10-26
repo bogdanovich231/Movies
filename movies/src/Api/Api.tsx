@@ -7,7 +7,6 @@ export default interface IMovie {
     vote_average: number;
     id: number;
     popularity: number;
-
 }
 
 export async function searchMovie(query: string): Promise<IMovie | undefined> {
@@ -22,10 +21,11 @@ export async function searchMovie(query: string): Promise<IMovie | undefined> {
                 }
             });
         const result = await res.json();
-        console.log(result);
-        return result;
+        console.log("api results", result.results);
+        return result.results;
     } catch (error) {
-        console.error('Error in search books: ', error)
+        console.error('Error in search books: ', error);
+        return;
     }
 }
 

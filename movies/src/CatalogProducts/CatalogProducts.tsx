@@ -1,9 +1,15 @@
-import ProductElement from "../ProductElement/ProductElement"
+import IMovie from "../Api/Api";
+import ProductElement from "../ProductElement/ProductElement";
+import "./CatalogProducts.scss";
 
-function CatalogProducts() {
+function CatalogProducts({ searchResults }: { searchResults: IMovie[] }) {
+    console.log("catalog", searchResults)
+
     return (
         <div className="catalog">
-            <ProductElement />
+            {searchResults.map((movie) => (
+                <ProductElement key={movie.id} movie={movie} />
+            ))}
         </div>
     )
 }
