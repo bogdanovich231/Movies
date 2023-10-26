@@ -11,7 +11,7 @@ function ProductElement({ movie }: { movie: IMovie }) {
             <div className="information">
                 <h3>{movie.title}</h3>
                 <p className="description">
-                    {movie.overview}
+                    {`${movie.overview.slice(0, 70)}...`}
                 </p>
                 <p className="release_date">
                     {movie.release_date}
