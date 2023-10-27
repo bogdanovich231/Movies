@@ -14,23 +14,26 @@ class Search extends Component<SearchProps, SearchState> {
     constructor(props: SearchProps) {
         super(props);
         this.state = {
-            query: '',
+            query: localStorage.getItem("searchQuery") || "",
             searchResults: [],
         };
     }
     handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         this.setState({ query: event.target.value });
+
     }
     handleSearch = async () => {
         const { query } = this.state;
+        localStorage.setItem("searchQuery", query);
         const result = await searchMovie(query);
         console.log("Results from API:", result);
         this.props.updateSearchResults(result || []);
     }
+
     render() {
         return (
             <div className="search_bar" >
-                <input placeholder="Search movie" type="text" onChange={this.handleInputChange} />
+                <input placeholder="Search movie" type="text" onChange={this.handleInputChange} value={this.state.query} />
                 <button className="search_btn" onClick={this.handleSearch}>
                     <img src={search} alt="search btn" />
                 </button>

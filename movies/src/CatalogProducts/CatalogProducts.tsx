@@ -6,7 +6,7 @@ function CatalogProducts({ searchResults }: { searchResults: IMovie[] }) {
     console.log("catalog", searchResults);
 
     if (searchResults.length === 0) {
-        return <div>Results not found</div>;
+        return <div className="results_not_Found">Results not found</div>;
     }
 
     return (
