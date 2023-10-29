@@ -14,7 +14,7 @@ class ShowError extends Component<Record<string, never>, { showError: boolean }>
             throw new Error("Test error.")
         }
         return (
-            <button className="show_err_btn" onClick={this.showError}>Show Error</button>
+            <buttton className="show_err_btn" onClick={this.showError}>Show Error</button>
         )
     }
 

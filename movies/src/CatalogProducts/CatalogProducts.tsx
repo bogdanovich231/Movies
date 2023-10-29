@@ -1,21 +1,20 @@
-import IMovie from "../Api/Api";
-import ProductElement from "../ProductElement/ProductElement";
-import "./CatalogProducts.scss";
+import IMovie from '../Api/Api';
+import Loading from '../Loading/Loading';
+import ProductElement from '../ProductElement/ProductElement';
+import './CatalogProducts.scss';
 
-function CatalogProducts({ searchResults }: { searchResults: IMovie[] }) {
-    console.log("catalog", searchResults);
+function CatalogProducts({ searchResults, isLoading }: { searchResults: IMovie[]; isLoading: boolean }) {
+  console.log('catalog', searchResults);
 
-    if (searchResults.length === 0) {
-        return <div className="results_not_Found">Results not found</div>;
-    }
+  if (searchResults.length === 0) {
+    return <div className="results_not_Found">Results not found</div>;
+  }
 
-    return (
-        <div className="catalog">
-            {searchResults.map((movie) => (
-                <ProductElement key={movie.id} movie={movie} />
-            ))}
-        </div>
-    )
+  return (
+    <div className="catalog">
+      {isLoading ? <Loading /> : searchResults.map((movie) => <ProductElement key={movie.id} movie={movie} />)}
+    </div>
+  );
 }
-
+12;
 export default CatalogProducts;
