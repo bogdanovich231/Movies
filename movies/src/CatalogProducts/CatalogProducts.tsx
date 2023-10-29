@@ -16,5 +16,5 @@ function CatalogProducts({ searchResults, isLoading }: { searchResults: IMovie[]
     </div>
   );
 }
-12;
+
 export default CatalogProducts;

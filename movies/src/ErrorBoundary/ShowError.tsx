@@ -1,23 +1,24 @@
-import { Component } from 'react'
-import "./ErrorMessage.scss";
+import { Component } from 'react';
+import './ErrorMessage.scss';
 
-class ShowError extends Component<Record<string, never>, { showError: boolean }>{
-    constructor(props: Record<string, never>) {
-        super(props);
-        this.state = { showError: false }
+class ShowError extends Component<Record<string, never>, { showError: boolean }> {
+  constructor(props: Record<string, never>) {
+    super(props);
+    this.state = { showError: false };
+  }
+  showError = () => {
+    this.setState({ showError: true });
+  };
+  render() {
+    if (this.state.showError) {
+      throw new Error('Test error.');
     }
-    showError = () => {
-        this.setState({ showError: true })
-    }
-    render() {
-        if (this.state.showError) {
-            throw new Error("Test error.")
-        }
-        return (
-            <buttton className="show_err_btn" onClick={this.showError}>Show Error</button>
-        )
-    }
-
+    return (
+      <button className="show_err_btn" onClick={this.showError}>
+        Show Error
+      </button>
+    );
+  }
 }
 
 export default ShowError;
