@@ -3,6 +3,8 @@ import './App.scss';
 import Header from './Header/Header';
 import IMovie from './Api/Api';
 import Loading from './Loading/Loading';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundery';
+import ErrorMessage from './ErrorBoundary/ErrorMessage';
 const CatalogProducts = lazy(() => import('./CatalogProducts/CatalogProducts'));
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
   }
 
   return (
+    <ErrorBoundary fallback={<ErrorMessage />}>
     <div className="banner_start">
       <Header updateSearchResults={updateSearchResults} />
       <h2 className="title">
@@ -25,6 +28,7 @@ function App() {
         <CatalogProducts searchResults={searchResults} isLoading={isLoading} />
       </Suspense>
     </div>
+    </ErrorBoundary>
   );
 }
 
