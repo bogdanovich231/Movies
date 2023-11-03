@@ -1,8 +1,30 @@
-import  {useState} from 'react';
-import IMovie from '../Api/Api';
+import  {useState, useEffect} from 'react';
+import IMovie, { getMovieById } from '../Api/Api';
+import { useParams } from 'react-router';
 
 function ProductDetailed() {
+  let { id } = useParams();
   const [movie, setMovie] = useState<IMovie | null>(null);
+  const [, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMovieDetails = async () => {
+      if (!id) {
+        return;
+      }
+
+      const result = await getMovieById(parseInt(id));
+      if (result) {
+        setMovie(result);
+      } else {
+        console.error('Фильм не найден');
+      }
+
+      setLoading(false);
+    };
+
+    fetchMovieDetails();
+  }, [id]);
 
   if (!movie) {
     return <div>Фильм не найден</div>;
