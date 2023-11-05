@@ -1,9 +1,9 @@
-import  {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import IMovie, { getMovieById } from '../Api/Api';
 import { useParams } from 'react-router';
 
 function ProductDetailed() {
-  let { id } = useParams();
+  const { id } = useParams();
   const [movie, setMovie] = useState<IMovie | null>(null);
   const [, setLoading] = useState(true);
 

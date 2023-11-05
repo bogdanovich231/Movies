@@ -1,7 +1,5 @@
 import './ProductElement.scss';
 import IMovie from '../Api/Api';
-import  { useState } from 'react';
-import ProductDetailed from '../ProductDetailed/ProductDetailed';
 import { useNavigate } from 'react-router-dom';
 
 function ProductElement({ movie }: { movie: IMovie }) {
