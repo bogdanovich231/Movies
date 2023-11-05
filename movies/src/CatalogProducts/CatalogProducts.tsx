@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import IMovie from '../Api/Api';
 import ProductElement from '../ProductElement/ProductElement';
 import './CatalogProducts.scss';
@@ -12,7 +11,6 @@ function CatalogProducts({ searchResults, isLoading }: { searchResults: IMovie[]
 
   return (
     <div className="catalog">
-      
       {searchResults.map((movie) => ( 
         <Link key={movie.id} to={`movie/${movie.id}`}>
         <ProductElement key={movie.id} movie={movie} />
