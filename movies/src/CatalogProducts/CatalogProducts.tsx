@@ -4,10 +4,11 @@ import './CatalogProducts.scss';
 import { Outlet, Link } from 'react-router-dom';
 
 function CatalogProducts({ searchResults }: { searchResults: IMovie[] }) {
-  if (searchResults.length === 0) {
+  if (!Array.isArray(searchResults) || searchResults.length === 0) {
     return <div className="results_not_Found">Results not found</div>;
   }
-
+console.log("Search Results",searchResults)
+  
   return (
     <div className="catalog">
       {searchResults.map((movie) => (

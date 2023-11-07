@@ -26,7 +26,3 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <RouterProvider router={router} />
   </React.StrictMode>
 );
-
-alert(
-  'Dear reviewer, I hope for your loyalty, on my request, to check the work on the last day of the deadline, unfortunately, I did not have enough time to complete the task qualitatively.'
-);
