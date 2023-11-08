@@ -4,13 +4,13 @@ import './SearchBar.scss';
 import IMovie, { searchMovie } from '../Api/Api';
 
 export interface SearchProps {
-  updateSearchResults: (data: { results: IMovie[], pagination: { total_pages: number } } | undefined) => void;
+  updateSearchResults: (data: { results: IMovie[]; pagination: { total_pages: number } } | undefined) => void;
 }
 
 function Search({ updateSearchResults }: SearchProps) {
   const [query, setQuery] = useState<string>(localStorage.getItem('searchQuery') || '');
   const [, setIsLoading] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -19,7 +19,7 @@ function Search({ updateSearchResults }: SearchProps) {
   const handleSearch = async () => {
     localStorage.setItem('searchQuery', query);
     setIsLoading(true);
-  
+
     try {
       const result = await searchMovie(query, page);
       updateSearchResults(result);

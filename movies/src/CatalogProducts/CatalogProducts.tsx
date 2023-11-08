@@ -7,8 +7,8 @@ function CatalogProducts({ searchResults }: { searchResults: IMovie[] }) {
   if (!Array.isArray(searchResults) || searchResults.length === 0) {
     return <div className="results_not_Found">Results not found</div>;
   }
-console.log("Search Results",searchResults)
-  
+  console.log('Search Results', searchResults);
+
   return (
     <div className="catalog">
       {searchResults.map((movie) => (
