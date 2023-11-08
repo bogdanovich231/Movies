@@ -11,18 +11,12 @@ const CatalogProducts = lazy(() => import('./CatalogProducts/CatalogProducts'));
 function App() {
   const [searchResults, setSearchResults] = useState<IMovie[]>([]);
   const [searchQuery, ] = useState("");
-  const [currentPage, ] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
   const updateSearchResults = (data: { results: IMovie[], pagination: { total_pages: number } } | undefined) => {
     if (data) {
       setSearchResults(data.results);
-      updateTotalPages(data.pagination);
-    }
-  };
-  const updateTotalPages = (pagination: { total_pages: number } | undefined) => {
-    if (pagination) {
-      setTotalPages(pagination.total_pages);
+      setTotalPages(data.pagination.total_pages);
     }
   };
     console.log("1",searchResults)
@@ -39,10 +33,10 @@ function App() {
         <Suspense fallback={<Loading />}>
   <CatalogProducts searchResults={searchResults} />
   <Pagination
-    totalPages={totalPages}
-    searchQuery={searchQuery}
-    updateSearchResults={updateSearchResults}
-  />
+  total_pages={totalPages}
+  query={searchQuery}
+  updateSearchResults={updateSearchResults}
+/>
 </Suspense>
       </div>
     </ErrorBoundary>
