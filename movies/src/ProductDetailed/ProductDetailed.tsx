@@ -33,13 +33,13 @@ function ProductDetailed() {
   return (
     <div className="product_detailed">
       <div className="img">
-        <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="" />
+        <img src={movie.large_cover_image} alt={movie.title} />
       </div>
       <div className="information">
         <p>Movie ID: {movie.id}</p>
         <h3>{movie.title}</h3>
-        <p className="description">{movie.overview}</p>
-        <p className="release_date">{movie.release_date}</p>
+        <p className="description">{movie.rating}</p>
+        <p className="release_date">{movie.year}</p>
       </div>
     </div>
   );

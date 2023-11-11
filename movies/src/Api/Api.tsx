@@ -1,52 +1,48 @@
 export default interface IMovie {
-  backdrop_path: string;
+  large_cover_image: string;
   title: string;
-  overview: string;
-  poster_path: string;
-  release_date: string;
-  vote_average: number;
+  year: number;
   id: number;
-  popularity: number;
+  rating: number;
 }
-interface IPaginationData {
+
+export interface IPaginationData {
   total_pages: number;
+  movie_count: number;
+  limit: number;
 }
-export async function searchMovie(
-  query: string,
-  page: number
-): Promise<{ results: IMovie[]; pagination: IPaginationData } | undefined> {
-  console.log('1', query);
+
+export async function searchMovie(query: string, page: number): Promise<{ results: IMovie[], pagination: IPaginationData } | undefined> {
   try {
     const encodeQuery = encodeURIComponent(query);
     const res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${encodeQuery}&include_adult=false&language=en-US&page=${page}`,
+      `https://yts.mx/api/v2/list_movies.json?query_term=${encodeQuery}&page=${page}`,
       {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNjA1YjRhODFjMjU2NDQxNmExNTc1YWEwOTI2ZmU3OSIsInN1YiI6IjY1MzdkODNiOTQ2MzE4MDBjNmI1Y2QxNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oITUDrSa7ve95U8-sdoLOeBDix1lJSWuteg1ki3q3A8',
         },
       }
     );
     const result = await res.json();
-    console.log('api results', result.results);
-    console.log('Page', result.total_pages);
-    return { results: result.results, pagination: { total_pages: result.total_pages } };
+    console.log('API results', result.data.movies);
+    console.log("Page", result.data.page_number);
+
+    const totalPages = Math.ceil(result.data.movie_count / result.data.limit);
+
+    return { results: result.data.movies, pagination: { total_pages: totalPages, movie_count: result.data.movie_count, limit: result.data.limit } };
   } catch (error) {
-    console.error('Error in search books: ', error);
+    console.error('Error in search movies: ', error);
     return;
   }
 }
 
 export async function getMovieById(movieId: number): Promise<IMovie | undefined> {
   try {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, {
+    const response = await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}`, {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNjA1YjRhODFjMjU2NDQxNmExNTc1YWEwOTI2ZmU3OSIsInN1YiI6IjY1MzdkODNiOTQ2MzE4MDBjNmI1Y2QxNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oITUDrSa7ve95U8-sdoLOeBDix1lJSWuteg1ki3q3A8',
       },
     });
 
@@ -55,9 +51,10 @@ export async function getMovieById(movieId: number): Promise<IMovie | undefined>
     }
 
     const result = await response.json();
-    return result;
+    return result.data.movie;
   } catch (error) {
     console.error('Error:', error);
     return;
   }
 }
+

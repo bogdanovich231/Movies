@@ -1,22 +1,61 @@
+import React, { useState, useEffect } from 'react';
 import IMovie from '../Api/Api';
+import Loading from '../Loading/Loading';
 import ProductElement from '../ProductElement/ProductElement';
-import './CatalogProducts.scss';
-import { Outlet, Link } from 'react-router-dom';
+import Pagination from '../Pagination/Pagination';
+import { IPaginationData, searchMovie } from '../Api/Api';
+import { useNavigate } from 'react-router-dom';
 
-function CatalogProducts({ searchResults }: { searchResults: IMovie[] }) {
-  if (!Array.isArray(searchResults) || searchResults.length === 0) {
+interface CatalogProductsProps {
+  searchResults: { results: IMovie[]; pagination: IPaginationData } | IMovie[];
+  isLoading: boolean;
+}
+
+function CatalogProducts({
+  searchResults,
+  isLoading,
+}: CatalogProductsProps) {
+  const [products, setProducts] = useState<IMovie[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const allProductsData = await searchMovie(searchQuery, currentPage);
+        setProducts(allProductsData?.results || []);
+        navigate(`/page/${currentPage}`);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [searchQuery, currentPage]);
+
+  if (Array.isArray(searchResults)) {
     return <div className="results_not_Found">Results not found</div>;
   }
-  console.log('Search Results', searchResults);
+
+  const totalPages = searchResults.pagination.total_pages;
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="catalog">
-      {searchResults.map((movie) => (
-        <Link key={movie.id} to={`movie/${movie.id}`}>
-          <ProductElement key={movie.id} movie={movie} />
-        </Link>
-      ))}
-      <Outlet />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          {products.map((movie) => (
+            <ProductElement key={movie.id} movie={movie} />
+          ))}
+          <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+        </>
+      )}
     </div>
   );
 }

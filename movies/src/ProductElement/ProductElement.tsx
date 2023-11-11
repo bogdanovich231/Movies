@@ -6,20 +6,21 @@ function ProductElement({ movie }: { movie: IMovie }) {
   const navigate = useNavigate();
 
   const openModal = () => {
-    navigate(`/movie/${movie.id}`);
+    navigate(`movie/${movie.id}`);
   };
-
   return (
     <div className="product">
       <div className="img">
-        <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt="" />
+        <img src={movie.large_cover_image} alt={movie.title} />
       </div>
       <div className="information">
         <h3>{movie.title}</h3>
-        <p className="description">{`${movie.overview.slice(0, 70)}...`}</p>
-        <p className="release_date">{movie.release_date}</p>
+        <p className="rating">{movie.rating}</p>
+        <p className="release_date">{movie.year}</p>
+        <div className="button">
+          <button onClick={openModal}>View details</button>
+        </div>
       </div>
-      <button onClick={openModal}>View Details</button>
     </div>
   );
 }
