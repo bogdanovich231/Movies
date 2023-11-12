@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import IMovie, { getMovieById } from '../Api/Api';
 import { useParams } from 'react-router';
+import Loading from '../Loading/Loading';
 
 function ProductDetailed() {
   const { id } = useParams();
   const [movie, setMovie] = useState<IMovie | null>(null);
-  const [, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -13,25 +14,40 @@ function ProductDetailed() {
         return;
       }
 
-      const result = await getMovieById(parseInt(id));
-      if (result) {
-        setMovie(result);
-      } else {
-        console.error('Фильм не найден');
+      try {
+        const result = await getMovieById(parseInt(id));
+        if (result) {
+          setMovie(result);
+        } else {
+          console.log('Movie not found');
+        }
+      } catch (error) {
+        console.log('Error loading movie:', error);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     };
 
     fetchMovieDetails();
   }, [id]);
 
+  if (loading) {
+    return (
+      <div data-testid="loading">
+        <Loading />
+      </div>
+    );
+  }
+
   if (!movie) {
-    return <div>Фильм не найден</div>;
+    return <div>Movie not found</div>;
   }
 
   return (
     <div className="product_detailed">
+      <div className="button">
+        <button>X</button>
+      </div>
       <div className="img">
         <img src={movie.large_cover_image} alt={movie.title} />
       </div>
