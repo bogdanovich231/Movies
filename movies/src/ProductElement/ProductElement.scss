@@ -1,0 +1,18 @@
+.product {
+    display: flex;
+    align-items: center;
+    width: 537px;
+    height: 300px;
+    background: white;
+    border-radius: 15px;
+
+    img {
+        width: 50%;
+        height: 300px;
+        border-radius: 15px 0px 0px 15px;
+    }
+
+    .release_date {
+        color: #E50914;
+    }
+}
