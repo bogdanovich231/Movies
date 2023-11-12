@@ -1,0 +1,32 @@
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_btn {
+        border-radius: 50%;
+        padding: 15px 23px;
+        border: 1px solid #E50914;
+        background-color: transparent;
+        color: #E50914;
+
+        &:hover {
+            background-color: #E50914;
+            color: white;
+        }
+    }
+
+    .active {
+        border-radius: 50%;
+        padding: 15px 23px;
+        color: white;
+        background-color: #E50914;
+        border: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .pagination_btn {
+        padding: 8px 14px;
+    }
+}

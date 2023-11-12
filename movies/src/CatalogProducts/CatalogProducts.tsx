@@ -43,6 +43,7 @@ function CatalogProducts({ searchResults, isLoading }: CatalogProductsProps) {
   };
 
   return (
+    <>
     <div className="catalog">
       {isLoading ? (
         <Loading />
@@ -51,10 +52,11 @@ function CatalogProducts({ searchResults, isLoading }: CatalogProductsProps) {
           {products.map((movie) => (
             <ProductElement key={movie.id} movie={movie} />
           ))}
-          <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
         </>
       )}
     </div>
+    <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handlePageChange} />
+    </>
   );
 }
 
