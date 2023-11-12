@@ -13,6 +13,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["node", "jest", "@testing-library/jest-dom"],
+    "esModuleInterop": true,
+    
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,

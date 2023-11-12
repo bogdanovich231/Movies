@@ -8,4 +8,7 @@ module.exports = {
     extensionsToTreatAsEsm: ['.jsx, .tsx'],
 
     transformIgnorePatterns: ['/node_modules/', '\\.pnp\\.[^\\/]+$'],
+    
+        setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"]
+    
 };

@@ -5,6 +5,7 @@ import ProductElement from '../ProductElement/ProductElement';
 import Pagination from '../Pagination/Pagination';
 import { IPaginationData, searchMovie } from '../Api/Api';
 import { useNavigate } from 'react-router-dom';
+import './CatalogProducts.scss';
 
 interface CatalogProductsProps {
   searchResults: { results: IMovie[]; pagination: IPaginationData } | IMovie[];
@@ -27,7 +28,7 @@ function CatalogProducts({
         setProducts(allProductsData?.results || []);
         navigate(`/page/${currentPage}`);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.log('Error fetching data:', error);
       }
     };
 
