@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import IMovie from '../Api/Api';
 import Loading from '../Loading/Loading';
 import ProductElement from '../ProductElement/ProductElement';
@@ -12,13 +12,10 @@ interface CatalogProductsProps {
   isLoading: boolean;
 }
 
-function CatalogProducts({
-  searchResults,
-  isLoading,
-}: CatalogProductsProps) {
+function CatalogProducts({ searchResults, isLoading }: CatalogProductsProps) {
   const [products, setProducts] = useState<IMovie[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery,] = useState('');
+  const [searchQuery] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {

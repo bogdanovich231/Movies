@@ -12,25 +12,28 @@ export interface IPaginationData {
   limit: number;
 }
 
-export async function searchMovie(query: string, page: number): Promise<{ results: IMovie[], pagination: IPaginationData } | undefined> {
+export async function searchMovie(
+  query: string,
+  page: number
+): Promise<{ results: IMovie[]; pagination: IPaginationData } | undefined> {
   try {
     const encodeQuery = encodeURIComponent(query);
-    const res = await fetch(
-      `https://yts.mx/api/v2/list_movies.json?query_term=${encodeQuery}&page=${page}`,
-      {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-        },
-      }
-    );
+    const res = await fetch(`https://yts.mx/api/v2/list_movies.json?query_term=${encodeQuery}&page=${page}`, {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+      },
+    });
     const result = await res.json();
     console.log('API results', result.data.movies);
-    console.log("Page", result.data.page_number);
+    console.log('Page', result.data.page_number);
 
     const totalPages = Math.ceil(result.data.movie_count / result.data.limit);
 
-    return { results: result.data.movies, pagination: { total_pages: totalPages, movie_count: result.data.movie_count, limit: result.data.limit } };
+    return {
+      results: result.data.movies,
+      pagination: { total_pages: totalPages, movie_count: result.data.movie_count, limit: result.data.limit },
+    };
   } catch (error) {
     console.error('Error in search movies: ', error);
     return;
@@ -57,4 +60,3 @@ export async function getMovieById(movieId: number): Promise<IMovie | undefined>
     return;
   }
 }
-

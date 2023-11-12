@@ -32,7 +32,7 @@ const Search: FC<SearchProps> = ({ updateSearchResults }) => {
       console.log('Results from API:', result);
       updateSearchResults(result || []);
     } catch (error) {
-      console.error('Error:', error);
+      console.log('Error:', error);
     } finally {
       setState({ ...state, isLoading: false });
     }

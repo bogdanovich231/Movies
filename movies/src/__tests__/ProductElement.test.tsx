@@ -1,6 +1,7 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import ProductElement from '../ProductElement/ProductElement';
 import { getMovieById } from '../Api/Api';
+import '@testing-library/jest-dom';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -14,7 +15,7 @@ jest.mock('../Api/Api', () => ({
 
 describe('ProductElement Component', () => {
   const mockMovie = {
-    id: 123,
+    id: 28778,
     title: 'Mock Movie',
     large_cover_image: 'mock-image-url',
     rating: 7.5,
@@ -42,9 +43,10 @@ describe('ProductElement Component', () => {
 
   it('calls additional API on button click', async () => {
     render(<ProductElement movie={mockMovie} />);
-
     fireEvent.click(screen.getByText('View details'));
 
-    await expect(getMovieById).toHaveBeenCalledWith(mockMovie.id);
+    await waitFor(() => {
+      expect(getMovieById).toHaveBeenCalledWith(mockMovie.id);
+    });
   });
 });

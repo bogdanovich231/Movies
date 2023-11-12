@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import Search from '../SearchBar/SearchBar';
+import '@testing-library/jest-dom';
 
 const localStorageMock = {
   getItem: jest.fn(),

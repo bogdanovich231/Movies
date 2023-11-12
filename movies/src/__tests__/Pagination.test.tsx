@@ -15,7 +15,7 @@ describe('Pagination Component', () => {
       </BrowserRouter>
     );
 
-    fireEvent.click(screen.getByText('4')); 
+    fireEvent.click(screen.getByText('4'));
 
     expect(onPageChange).toHaveBeenCalledWith(4);
   });
