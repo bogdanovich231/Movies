@@ -1,18 +1,17 @@
-import React, { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Header from './Header/Header';
 import IMovie from './Api/Api';
 import Loading from './Loading/Loading';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundery';
-import ErrorMessage from './ErrorBoundary/ErrorMessage';
-import Pagination from './Pagination/Pagination';
+import NotFound from './NotFound/NotFound';
+
 const CatalogProducts = lazy(() => import('./CatalogProducts/CatalogProducts'));
 const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));
 
 function App() {
   const [searchResults, setSearchResults] = useState<IMovie[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
 
   const updateSearchResults = (results: IMovie[] | undefined) => {
     setSearchResults(results || []);
@@ -31,20 +30,21 @@ function App() {
           <Route
             path="/"
             element={
-            <Suspense fallback={<Loading />}>
-            <CatalogProducts searchResults={searchResults} isLoading={isLoading} />
-            </Suspense>
+              <Suspense fallback={<Loading />}>
+                <CatalogProducts searchResults={searchResults} isLoading={isLoading} />
+              </Suspense>
             }
           />
           <Route
             path="page/:pageNumber"
             element={
-            <Suspense fallback={<Loading />}>
-            <CatalogProducts searchResults={searchResults} isLoading={isLoading} />
-            </Suspense>
+              <Suspense fallback={<Loading />}>
+                <CatalogProducts searchResults={searchResults} isLoading={isLoading} />
+              </Suspense>
             }
           />
           <Route path="/movie/:id" element={<ProductDetailed />} />
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
     </Router>
