@@ -1,0 +1,23 @@
+.product {
+    display: flex;
+    width: 537px;
+    height: 300px;
+    background: white;
+    border-radius: 15px;
+
+    img {
+        height: 300px;
+        border-radius: 15px 0px 0px 15px;
+    }
+
+    .release_date {
+        color: #E50914;
+    }
+    button{
+        border: none;
+        background: #E50914;
+        border-radius: 15px;
+        padding: 10px 15px;
+        color: #ffff;
+    }
+}
