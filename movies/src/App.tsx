@@ -2,9 +2,9 @@ import { Suspense, lazy, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Header from './Header/Header';
-import IMovie from './Api/Api';
 import Loading from './Loading/Loading';
 import NotFound from './NotFound/NotFound';
+import IMovie from './Types/Types';
 
 const CatalogProducts = lazy(() => import('./CatalogProducts/CatalogProducts'));
 const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import IMovie, { getMovieById } from '../Api/Api';
+import  { getMovieById } from '../Api/Api';
 import { useParams } from 'react-router';
 import Loading from '../Loading/Loading';
+import IMovie from '../Types/Types';
 
 function ProductDetailed() {
   const { id } = useParams();

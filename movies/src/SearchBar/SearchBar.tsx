@@ -1,16 +1,8 @@
 import { ChangeEvent, FC, useState } from 'react';
 import search from '../assets/Vector.svg';
 import './SearchBar.scss';
-import IMovie, { searchMovie } from '../Api/Api';
-
-interface SearchState {
-  query: string;
-  searchResults: IMovie[] | undefined;
-  isLoading: boolean;
-}
-interface SearchProps {
-  updateSearchResults: (results: IMovie[] | undefined) => void;
-}
+import  { searchMovie } from '../Api/Api';
+import IMovie, { SearchProps, SearchState } from '../Types/Types';
 
 const Search: FC<SearchProps> = ({ updateSearchResults }) => {
   const [state, setState] = useState<SearchState>({

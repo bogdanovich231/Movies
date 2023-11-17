@@ -1,24 +1,12 @@
-export default interface IMovie {
-  large_cover_image: string;
-  title: string;
-  year: number;
-  id: number;
-  rating: number;
-}
+import IMovie, { IPaginationData } from "../Types/Types";
 
-export interface IPaginationData {
-  total_pages: number;
-  movie_count: number;
-  limit: number;
-}
 
 export async function searchMovie(
   query: string,
   page: number
 ): Promise<{ results: IMovie[]; pagination: IPaginationData } | undefined> {
   try {
-    const encodeQuery = encodeURIComponent(query);
-    const res = await fetch(`https://yts.mx/api/v2/list_movies.json?query_term=${encodeQuery}&page=${page}`, {
+    const res = await fetch(`https://yts.mx/api/v2/list_movies.json?query_term=${query}&page=${page}`, {
       method: 'GET',
       headers: {
         accept: 'application/json',

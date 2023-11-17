@@ -1,5 +1,6 @@
 import ShowError from '../ErrorBoundary/ShowError';
-import Search, { SearchProps } from '../SearchBar/SearchBar';
+import Search from '../SearchBar/SearchBar';
+import { SearchProps } from '../Types/Types';
 import './Header.scss';
 import { Outlet, Link } from 'react-router-dom';
 

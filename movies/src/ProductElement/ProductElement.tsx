@@ -1,5 +1,5 @@
+import IMovie from '../Types/Types';
 import './ProductElement.scss';
-import IMovie from '../Api/Api';
 import { useNavigate } from 'react-router-dom';
 
 function ProductElement({ movie }: { movie: IMovie }) {

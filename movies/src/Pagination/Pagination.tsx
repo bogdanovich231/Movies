@@ -1,10 +1,6 @@
 import React from 'react';
 import './Pagination.scss';
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}
+import { PaginationProps } from '../Types/Types';
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = [];

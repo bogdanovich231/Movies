@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import IMovie from '../Api/Api';
 import Loading from '../Loading/Loading';
 import ProductElement from '../ProductElement/ProductElement';
 import Pagination from '../Pagination/Pagination';
-import { IPaginationData, searchMovie } from '../Api/Api';
+import {  searchMovie } from '../Api/Api';
 import { useNavigate } from 'react-router-dom';
 import './CatalogProducts.scss';
+import IMovie, { IPaginationData } from '../Types/Types';
 
 interface CatalogProductsProps {
   searchResults: { results: IMovie[]; pagination: IPaginationData } | IMovie[];
