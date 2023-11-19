@@ -1,50 +1,19 @@
-import IMovie, { IPaginationData } from "../Types/Types";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import IMovie, { IPaginationData } from '../Types/Types';
 
+const API_URL = 'https://yts.mx/api/v2';
 
-export async function searchMovie(
-  query: string,
-  page: number
-): Promise<{ results: IMovie[]; pagination: IPaginationData } | undefined> {
-  try {
-    const res = await fetch(`https://yts.mx/api/v2/list_movies.json?query_term=${query}&page=${page}`, {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-      },
-    });
-    const result = await res.json();
-    console.log('API results', result.data.movies);
-    console.log('Page', result.data.page_number);
+export const searchMovie = createApi({
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  endpoints: (builder) => ({
+    getMovies: builder.query<{ results: IMovie[]; pagination: IPaginationData }, { query: string; page: number }>({
+      query: ({ query, page }) => `list_movies.json?query_term=${query}&page=${page}`,
+    }),
+    getMovieById: builder.query<IMovie, number>({
+      query: (movieId) => `movie_details.json?movie_id=${movieId}`,
+    }),
+  }),
+});                                
 
-    const totalPages = Math.ceil(result.data.movie_count / result.data.limit);
-
-    return {
-      results: result.data.movies,
-      pagination: { total_pages: totalPages, movie_count: result.data.movie_count, limit: result.data.limit },
-    };
-  } catch (error) {
-    console.error('Error in search movies: ', error);
-    return;
-  }
-}
-
-export async function getMovieById(movieId: number): Promise<IMovie | undefined> {
-  try {
-    const response = await fetch(`https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}`, {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error('Movie not found');
-    }
-
-    const result = await response.json();
-    return result.data.movie;
-  } catch (error) {
-    console.error('Error:', error);
-    return;
-  }
-}
+export const { useGetMoviesQuery, useGetMovieByIdQuery } = searchMovie;
