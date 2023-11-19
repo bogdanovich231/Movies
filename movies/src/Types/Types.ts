@@ -1,7 +1,7 @@
 export default interface IMovie {
     large_cover_image: string;
     title: string;
-    year: number;
+    year: number; 
     id: number;
     rating: number;
   }
@@ -12,15 +12,19 @@ export default interface IMovie {
     limit: number;
   }
 
-  export interface SearchState {
-    query: string;
-    searchResults: IMovie[] | undefined;
+  export interface CatalogProductsProps {
+    searchResults: { results: IMovie[]; pagination: IPaginationData } | IMovie[];
     isLoading: boolean;
+    currentPage: number;
+  }
+ export  interface RootState {
+    catalog: CatalogProductsProps;
+    
   }
   export interface SearchProps {
     updateSearchResults: (results: IMovie[] | undefined) => void;
   }
-
+  
   export interface PaginationProps {
     currentPage: number;
     totalPages: number;
