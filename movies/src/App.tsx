@@ -6,7 +6,7 @@ import Loading from './Loading/Loading';
 import NotFound from './NotFound/NotFound';
 
 const CatalogProducts = lazy(() => import('./CatalogProducts/CatalogProducts'));
-// const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));
+const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           decision about which movie to watch.
         </h2>
         <Routes>
-          {/* <Route path="/movie/:id" element={<ProductDetailed />} /> */}
+          <Route path="/movie/:id" element={<ProductDetailed />} />
           <Route
             path="/"
             element={
