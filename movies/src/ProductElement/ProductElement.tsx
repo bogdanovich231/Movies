@@ -6,7 +6,7 @@ function ProductElement({ movie }: { movie: IMovie }) {
   const navigate = useNavigate();
 
   const openModal = () => {
-    navigate(`movie/${movie.id}`);
+    navigate(`/movie/${movie.id}`);
   };
   return (
     <div className="product">

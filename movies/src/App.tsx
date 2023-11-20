@@ -4,6 +4,7 @@ import './App.scss';
 import Header from './Header/Header';
 import Loading from './Loading/Loading';
 import NotFound from './NotFound/NotFound';
+import MainPage from './MainPage/MainPage';
 
 const CatalogProducts = lazy(() => import('./CatalogProducts/CatalogProducts'));
 const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));
@@ -11,14 +12,8 @@ const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));
 function App() {
   return (
     <Router>
-      <div className="banner_start">
-        <Header />
-        <h2 className="title">
-          We provide detailed descriptions of each film, trailers, ratings, and reviews to help you make an informed
-          decision about which movie to watch.
-        </h2>
+      <MainPage />
         <Routes>
-          <Route path="/movie/:id" element={<ProductDetailed />} />
           <Route
             path="/"
             element={
@@ -35,9 +30,10 @@ function App() {
               </Suspense>
             }
           />
+           <Route path="/movie/:id/" element={<ProductDetailed />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
     </Router>
   );
 }

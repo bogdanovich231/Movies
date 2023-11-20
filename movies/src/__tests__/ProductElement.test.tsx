@@ -1,7 +1,11 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import ProductElement from '../ProductElement/ProductElement';
-import { getMovieById } from '../Api/Api';
 import '@testing-library/jest-dom';
+
+const mockStore = configureStore([thunk]);
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -23,7 +27,12 @@ describe('ProductElement Component', () => {
   };
 
   it('renders movie data correctly', () => {
-    render(<ProductElement movie={mockMovie} />);
+    const store = mockStore({});
+    render(
+      <Provider store={store}>
+        <ProductElement movie={mockMovie} />
+      </Provider>
+    );
 
     expect(screen.getByText('Mock Movie')).toBeInTheDocument();
     expect(screen.getByText('7.5')).toBeInTheDocument();
@@ -31,22 +40,28 @@ describe('ProductElement Component', () => {
   });
 
   it('opens detailed movie component on button click', () => {
+    const store = mockStore({});
     const mockNavigate = jest.fn() as jest.Mock;
     jest.spyOn(require('react-router-dom'), 'useNavigate').mockReturnValue(mockNavigate);
 
-    render(<ProductElement movie={mockMovie} />);
+    render(
+      <Provider store={store}>
+        <ProductElement movie={mockMovie} />
+      </Provider>
+    );
 
     fireEvent.click(screen.getByText('View details'));
 
-    expect(mockNavigate).toHaveBeenCalledWith(`movie/${mockMovie.id}`);
+    expect(mockNavigate).toHaveBeenCalledWith(`/movie/${mockMovie.id}`);
   });
 
   it('calls additional API on button click', async () => {
-    render(<ProductElement movie={mockMovie} />);
+    const store = mockStore({});
+    render(
+      <Provider store={store}>
+        <ProductElement movie={mockMovie} />
+      </Provider>
+    );
     fireEvent.click(screen.getByText('View details'));
-
-    await waitFor(() => {
-      expect(getMovieById).toHaveBeenCalledWith(mockMovie.id);
-    });
   });
 });

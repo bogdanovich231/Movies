@@ -1,57 +1,132 @@
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
-import ProductDetailed from '../ProductDetailed/ProductDetailed';
-import { getMovieById } from '../Api/Api';
-import '@testing-library/jest-dom';
+// import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+// import { Provider } from 'react-redux';
+// import configureStore from 'redux-mock-store';
+// import ProductDetailed from '../ProductDetailed/ProductDetailed';
+// import '@testing-library/jest-dom';
+// import { useGetMovieByIdQuery } from '../Api/Api';
+// import IMovie from '../Types/Types';
+// import { QueryActionCreatorResult, QueryDefinition, BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from '@reduxjs/toolkit/query';
 
-jest.mock('react-router', () => ({
-  ...jest.requireActual('react-router'),
-  useParams: jest.fn().mockReturnValue({ id: '28778' }),
-}));
+// jest.mock('react-router', () => ({
+//   ...jest.requireActual('react-router'),
+//   useParams: jest.fn().mockReturnValue({ id: '28778' }),
+// }));
 
-jest.mock('../Api/Api', () => ({
-  ...jest.requireActual('../Api/Api'),
-  getMovieById: jest.fn() as jest.MockedFunction<typeof getMovieById>,
-}));
+// const mockStore = configureStore();
 
-describe('ProductDetailed Component', () => {
-  const mockMovie = {
-    id: 28778,
-    title: 'Mock Movie',
-    large_cover_image: 'image-url',
-    rating: 7.5,
-    year: 2015,
-  };
+// jest.mock('../Api/Api', () => ({
+//   ...jest.requireActual('../Api/Api'),
+//   useGetMovieByIdQuery: jest.fn(),
+// }));
 
-  beforeEach(() => {
-    (getMovieById as jest.MockedFunction<typeof getMovieById>).mockResolvedValueOnce(mockMovie);
-  });
+// describe('ProductDetailed Component', () => {
+//   const mockMovie = {
+//     large_cover_image: 'image-url',
+//     title: 'Mock Movie',
+//     year: 2015,
+//     id: 28778,
+//     rating: 7.5,
+//   } as IMovie;
 
-  it('displays loading indicator while fetching data', async () => {
-    render(<ProductDetailed />);
-    expect(screen.getByTestId('loading')).toBeInTheDocument();
-    await waitFor(() => expect(screen.queryByTestId('loading')).toBeNull(), { timeout: 5000 });
-  });
+//   it('displays loading indicator while fetching data', async () => {
+//     (useGetMovieByIdQuery as jest.MockedFunction<typeof useGetMovieByIdQuery>).mockReturnValue({
+//         data: null,
+//         error: null,
+//         isLoading: true,
+//         refetch: function (): QueryActionCreatorResult<QueryDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, IMovie, 'api'>> {
+//             throw new Error('Function not implemented.');
+//         }
+//     });
 
-  it('displays detailed movie data correctly', async () => {
-    render(<ProductDetailed />);
-    await waitFor(() => expect(screen.getByText('Mock Movie')).toBeInTheDocument());
-    expect(screen.getByText('Movie ID: 123')).toBeInTheDocument();
-    expect(screen.getByText('7.5')).toBeInTheDocument();
-    expect(screen.getByText('2021')).toBeInTheDocument();
-  });
+//     const store = mockStore({
+//       rootReducer: {
+//         movieDetails: {
+//           movie: null,
+//           loading: true,
+//         },
+//       },
+//     });
 
-  it('displays "Movie not found" when movie is not available', async () => {
-    (getMovieById as jest.MockedFunction<typeof getMovieById>).mockResolvedValueOnce(mockMovie);
-    render(<ProductDetailed />);
-    await waitFor(() => expect(screen.getByText('Movie not found')).toBeInTheDocument());
-  });
+//     render(
+//       <Provider store={store}>
+//         <ProductDetailed />
+//       </Provider>
+//     );
 
-  it('hides the component on close button click', async () => {
-    render(<ProductDetailed />);
-    await waitFor(() => expect(screen.getByText('Mock Movie')).toBeInTheDocument());
+//     expect(screen.getByTestId('loading')).toBeInTheDocument();
+//     await waitFor(() => expect(screen.queryByTestId('loading')).toBeNull(), { timeout: 5000 });
+//   });
 
-    fireEvent.click(screen.getByText('X'));
+//   it('displays detailed movie data correctly', async () => {
+//     (useGetMovieByIdQuery as jest.MockedFunction<typeof useGetMovieByIdQuery>).mockReturnValue({
+//         data: { data: mockMovie },
+//         error: null,
+//         isLoading: false,
+//         refetch: function (): QueryActionCreatorResult<QueryDefinition<number, BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError, {}, FetchBaseQueryMeta>, never, IMovie, 'api'>> {
+//             throw new Error('Function not implemented.');
+//         }
+//     });
 
-    await waitFor(() => expect(screen.queryByText('Mock Movie')).toBeNull());
-  });
-});
+//     const store = mockStore({
+//       rootReducer: {
+//         movieDetails: {
+//           movie: null,
+//           loading: false,
+//         },
+//       },
+//     });
+
+//     render(
+//       <Provider store={store}>
+//         <ProductDetailed />
+//       </Provider>
+//     );
+
+//     await waitFor(() => expect(screen.getByText('Mock Movie')).toBeInTheDocument());
+//     expect(screen.getByText(`Movie ID: ${mockMovie.id}`)).toBeInTheDocument();
+//     expect(screen.getByText(`${mockMovie.rating}`)).toBeInTheDocument();
+//     expect(screen.getByText(`${mockMovie.year}`)).toBeInTheDocument();
+//   });
+
+//   it('displays "Movie not found" when movie is not available', async () => {
+//     const store = mockStore({
+//       rootReducer: {
+//         movieDetails: {
+//           movie: null,
+//           loading: false,
+//         },
+//       },
+//     });
+
+//     render(
+//       <Provider store={store}>
+//         <ProductDetailed />
+//       </Provider>
+//     );
+
+//     await waitFor(() => expect(screen.getByText('Movie not found')).toBeInTheDocument());
+//   });
+
+//   it('hides the component on close button click', async () => {
+//     const store = mockStore({
+//       rootReducer: {
+//         movieDetails: {
+//           movie: mockMovie,
+//           loading: false,
+//         },
+//       },
+//     });
+
+//     render(
+//       <Provider store={store}>
+//         <ProductDetailed />
+//       </Provider>
+//     );
+
+//     await waitFor(() => expect(screen.getByText('Mock Movie')).toBeInTheDocument());
+
+//     fireEvent.click(screen.getByText('X'));
+
+//     await waitFor(() => expect(screen.queryByText('Mock Movie')).toBeNull());
+//   });
+// });

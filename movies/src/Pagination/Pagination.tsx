@@ -5,7 +5,7 @@ import { PaginationProps } from '../Types/Types';
 import { RootState } from '../store/store';
 import { setCurrentPage } from '../store/Pagination/Pagination.slice';
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination: React.FC<PaginationProps> = ({ totalPages, onPageChange }) => {
   const dispatch = useDispatch();
   const reduxCurrentPage = useSelector((state: RootState) => state.rootReducer.pagination.currentPage);
 

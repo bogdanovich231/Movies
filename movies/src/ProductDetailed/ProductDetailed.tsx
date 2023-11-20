@@ -1,8 +1,8 @@
+import { useGetMovieByIdQuery } from '../Api/Api';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router';
 import Loading from '../Loading/Loading';
-import { useGetMovieByIdQuery } from '../Api/Api';
 import { setLoading, setMovie } from '../store/Detailed/Detailed.slice';
 import { RootState } from '../store/store';
 import IMovie from '../Types/Types';
@@ -14,6 +14,8 @@ function ProductDetailed() {
   const loading = useSelector((state: RootState) => state.rootReducer.movieDetails.loading);
   const navigate = useNavigate();
 
+  const { data: result } = useGetMovieByIdQuery(parseInt(id || ''));
+
   useEffect(() => {
     const fetchMovieDetails = async () => {
       if (!id) {
@@ -22,9 +24,17 @@ function ProductDetailed() {
 
       try {
         dispatch(setLoading(true));
-        const result = await useGetMovieByIdQuery(parseInt(id)).data;
-        if (result) {
-          dispatch(setMovie(result));
+
+        if (result && 'data' in result) {
+          const movieData = result.data;
+
+          console.log('Movie data:', movieData);
+
+          if (movieData) {
+            dispatch(setMovie(movieData));
+          } else {
+            console.log('Movie not found');
+          }
         } else {
           console.log('Movie not found');
         }
@@ -36,7 +46,9 @@ function ProductDetailed() {
     };
 
     fetchMovieDetails();
-  }, [dispatch, id]);
+  }, [dispatch, id, result]);
+
+  console.log('Movie:', movie);
 
   if (loading) {
     return (

@@ -18,3 +18,4 @@ const productDetailSlice = createSlice({
 
 export const { setMovie, setLoading } = productDetailSlice.actions;
 export default productDetailSlice.reducer;
+ 

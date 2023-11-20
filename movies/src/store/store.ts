@@ -7,7 +7,7 @@ import paginationReducer from './Pagination/Pagination.slice';
 import catalogReducer from './Catalog/catalog.slice'; 
 import movieDetailsReducer from './Detailed/Detailed.slice';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   search: searchReducer,
   pagination: paginationReducer,
   catalog: catalogReducer, 
