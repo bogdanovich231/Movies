@@ -1,16 +1,15 @@
 import ShowError from '../ErrorBoundary/ShowError';
 import Search from '../SearchBar/SearchBar';
-import { SearchProps } from '../Types/Types';
 import './Header.scss';
 import { Outlet, Link } from 'react-router-dom';
 
-function Header({ updateSearchResults }: SearchProps) {
+function Header() {
   return (
     <div className="header">
       <h1>
         <Link to={`/`}>Movies</Link>
       </h1>
-      <Search updateSearchResults={updateSearchResults} />
+      <Search  />
       <ShowError />
       <Outlet />
     </div>

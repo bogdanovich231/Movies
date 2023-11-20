@@ -1,37 +1,29 @@
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Header from './Header/Header';
 import Loading from './Loading/Loading';
 import NotFound from './NotFound/NotFound';
-import IMovie from './Types/Types';
 
 const CatalogProducts = lazy(() => import('./CatalogProducts/CatalogProducts'));
-const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));
+// const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));
 
 function App() {
-  const [searchResults, setSearchResults] = useState<IMovie[]>([]);
-  const [isLoading] = useState(false);
-
-  const updateSearchResults = (results: IMovie[] | undefined) => {
-    setSearchResults(results || []);
-    console.log('update', results);
-  };
-
   return (
     <Router>
       <div className="banner_start">
-        <Header updateSearchResults={updateSearchResults} />
+        <Header />
         <h2 className="title">
           We provide detailed descriptions of each film, trailers, ratings, and reviews to help you make an informed
           decision about which movie to watch.
         </h2>
         <Routes>
+          {/* <Route path="/movie/:id" element={<ProductDetailed />} /> */}
           <Route
             path="/"
             element={
               <Suspense fallback={<Loading />}>
-                <CatalogProducts searchResults={searchResults} isLoading={isLoading} />
+                <CatalogProducts />
               </Suspense>
             }
           />
@@ -39,12 +31,11 @@ function App() {
             path="page/:pageNumber"
             element={
               <Suspense fallback={<Loading />}>
-                <CatalogProducts searchResults={searchResults} isLoading={isLoading} />
+                <CatalogProducts />
               </Suspense>
             }
           />
-          <Route path="/movie/:id" element={<ProductDetailed />} />
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>

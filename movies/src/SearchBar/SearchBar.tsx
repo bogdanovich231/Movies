@@ -12,7 +12,7 @@ const Search: FC = () => {
 
   const { data: searchResults, error } = useGetMoviesQuery({
     query,
-    page: 1, 
+    page: 1,
   });
 
   useEffect(() => {
