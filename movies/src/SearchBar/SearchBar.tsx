@@ -4,7 +4,7 @@ import search from '../assets/Vector.svg';
 import './SearchBar.scss';
 import { useGetMoviesQuery } from '../Api/Api';
 import { RootState } from '../store/store';
-import { setSearchResults , setLoading, setQuery} from '../store/search/search.slice';
+import { setSearchResults, setLoading, setQuery } from '../store/search/search.slice';
 
 const Search: FC = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,9 @@ const Search: FC = () => {
   }, [dispatch, searchResults, error]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setQuery(event.target.value));
+    const Query = event.target.value;
+    dispatch(setQuery(Query));
+    localStorage.setItem('searchQuery', Query);
   };
 
   const handleSearch = () => {

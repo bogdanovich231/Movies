@@ -13,18 +13,15 @@ import { RootState } from '../store/store';
 function CatalogProducts() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data: searchResults, error } = useGetMoviesQuery({ query: '', page: 1 });
   const { query } = useSelector((state: RootState) => state.rootReducer.search);
-
   const { currentPage, isLoading } = useSelector((state: RootState) => state.rootReducer.catalog);
+
+  const { data: searchResults, error } = useGetMoviesQuery({ query, page: currentPage });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         dispatch(setLoading(true));
-        
-        const searchQuery = query || '';
-        const searchResults = await useGetMoviesQuery({ query: searchQuery, page: currentPage });
 
         if (searchResults) {
           const totalPages = Math.ceil(searchResults.data.movie_count / searchResults.data.limit);
@@ -59,7 +56,7 @@ function CatalogProducts() {
                 <ProductElement key={movie.id} movie={movie} />
               ))
             ) : (
-              <div>No results found</div>
+              <div>Error loading data</div>
             )}
           </>
         )}
