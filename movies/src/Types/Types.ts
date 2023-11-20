@@ -11,7 +11,12 @@ export default interface IMovie {
     movie_count: number;
     limit: number;
   }
-
+  export interface IDataResponse{
+    movies: IMovie[],
+    total_pages: number;
+    movie_count: number;
+    limit: number;
+  }
   export interface CatalogProductsProps {
     searchResults: { results: IMovie[]; pagination: IPaginationData } | IMovie[];
     isLoading: boolean;
