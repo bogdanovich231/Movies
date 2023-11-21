@@ -7,8 +7,8 @@ export const searchMovie = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (builder) => ({
-    getMovies: builder.query<{ data: IDataResponse; }, { query: string; page: number }>({
-      query: ({ query, page }) => `list_movies.json?query_term=${query}&page=${page}`,
+    getMovies: builder.query<{ data: IDataResponse; }, { query: string; page: number, pageSize: number }>({
+      query: ({ query, page, pageSize }) => `list_movies.json?query_term=${query}&page=${page}&limit=${pageSize}`,
     }),
     getMovieById: builder.query<IMovie, number>({
       query: (movieId) => `movie_details.json?movie_id=${movieId}`,

@@ -15,8 +15,9 @@ function CatalogProducts() {
   const navigate = useNavigate();
   const { query } = useSelector((state: RootState) => state.rootReducer.search);
   const { currentPage, isLoading } = useSelector((state: RootState) => state.rootReducer.catalog);
+  const pageSize = useSelector((state: RootState) => state.rootReducer.pageSize.value);
 
-  const { data: searchResults, error } = useGetMoviesQuery({ query, page: currentPage });
+  const { data: searchResults, error } = useGetMoviesQuery({ query, page: currentPage, pageSize });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +39,7 @@ function CatalogProducts() {
     };
 
     fetchData();
-  }, [dispatch, searchResults, currentPage, navigate]);
+  }, [dispatch, searchResults, currentPage, navigate, pageSize]);
 
   if (error) {
     return <div>Error loading data</div>;
