@@ -1,5 +1,5 @@
 import { IFormInput } from '../../Interfaces/Interfaces';
-import './FormHook.scss';
+import '../FormUncontrolled/Form.scss';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from '../../Validation/Validation';
@@ -43,94 +43,97 @@ function FormHook() {
     console.log(watch("name"));
     console.log(watch("age"));
     return (
-        <div className="form_container">
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <label>
-                    Your Name:
-                    <input {...register("name", { required: true, })} />
-                    {errors.name && <p>{errors.name.message}</p>}
-                </label>
-                <label>
-                    Your age:
-                    <input {...register("age", { required: true })} />
-                    {errors.age && <p>{errors.age.message}</p>}
-                </label>
-                <label>
-                    Gmail:
-                    <input {...register("gmail", { required: true })} />
-                    {errors.gmail && <p>{errors.gmail.message}</p>}
-                </label>
-                <div>
+        <>
+            <div className="form_container">
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <label>
-                        Выберите страну:
+                        <h4>Your Name:</h4>
+                        <input {...register("name", { required: true, })} />
+                        {errors.name && <p>{errors.name.message}</p>}
+                    </label>
+                    <label>
+                        <h4>Your age:</h4>
+                        <input {...register("age", { required: true })} />
+                        {errors.age && <p>{errors.age.message}</p>}
+                    </label>
+                    <label>
+                        <h4>Gmail:</h4>
+                        <input {...register("gmail", { required: true })} />
+                        {errors.gmail && <p>{errors.gmail.message}</p>}
+                    </label>
+                    <div>
+                        <label>
+                            <h4>Select a country:</h4>
+                            <input
+                                {...register("country", { required: true })}
+                                list="countries"
+                            />
+                            <datalist id="countries">
+                                {countries.map((country) => (
+                                    <option key={country} value={country} />
+                                ))}
+                            </datalist>
+                            {errors.country && <p>{errors.country.message}</p>}
+                        </label>
+                    </div>
+                    <div className="select_container">
+                        <h4> Gender:</h4>
+                        <label>
+                            <input type="radio" value="male" {...register("gender", { required: true })} />
+                            Male
+                        </label>
+                        <label>
+                            <input type="radio" value="female" {...register("gender", { required: true })} />
+                            Female
+                        </label>
+                    </div>
+                    <div>
+                        <h4>Password</h4>
+                        <input type="password" {...register("password", { required: "Password is required" })} />
+                        {errors.password && <p>{errors.password.message}</p>}
+                    </div>
+                    <div>
+                        <h4>Password Again</h4>
                         <input
-                            {...register("country", { required: true })}
-                            list="countries"
+                            type="password"
+                            {...register("confirmPassword", { required: "Confirm Password is required" })}
                         />
-                        <datalist id="countries">
-                            {countries.map((country) => (
-                                <option key={country} value={country} />
-                            ))}
-                        </datalist>
-                        {errors.country && <p>{errors.country.message}</p>}
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Gender:
-                        <input type="radio" value="male" {...register("gender", { required: true })} />
-                        Male
-                    </label>
-                    <label>
-                        <input type="radio" value="female" {...register("gender", { required: true })} />
-                        Female
-                    </label>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type="password" {...register("password", { required: "Password is required" })} />
-                    {errors.password && <p>{errors.password.message}</p>}
-                </div>
-                <div>
-                    <label>Password Again</label>
-                    <input
-                        type="password"
-                        {...register("confirmPassword", { required: "Confirm Password is required" })}
-                    />
-                    {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
-                </div>
+                        {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+                    </div>
 
-                <div>
-                    <label>
-                        Upload Image:
-                        <input
-                            type="file"
-                            accept=".png, .jpeg, .jpg"
-                            onChange={(e) => {
-                                const file = e.target.files?.[0];
-                                if (file) {
-                                    const reader = new FileReader();
-                                    reader.onloadend = () => {
-                                        setValue("image", reader.result as string);
-                                    };
-                                    reader.readAsDataURL(file);
-                                }
-                            }}
-                        />
-                    </label>
-                    {errors.image && <p>{errors.image.message}</p>}
-                </div>
-                <div>
-                    <label>
-                        Accept Terms and Conditions:
-                        <input type="checkbox" {...register("acceptTerms", { required: true })} />
-                    </label>
-                    {errors.acceptTerms && <p>{errors.acceptTerms.message}</p>}
-                </div>
-                <input type="submit" disabled={!isFormValid} />
-            </form>
+                    <div>
+                        <label>
+                            <h4>Upload Image:</h4>
+                            <input
+                                className="custom-file-input"
+                                type="file"
+                                accept=".png, .jpeg, .jpg"
+                                onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => {
+                                            setValue("image", reader.result as string);
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }}
+                            />
+                        </label>
+                        {errors.image && <p>{errors.image.message}</p>}
+                    </div>
+                    <div className="select_container">
+                        <label>
+                            <h4>Accept Terms and Conditions:</h4>
+                            <input type="checkbox" {...register("acceptTerms", { required: true })} />
+                        </label>
+                        {errors.acceptTerms && <p>{errors.acceptTerms.message}</p>}
+                    </div>
+                    <input className="button_submit" type="submit" disabled={!isFormValid} />
+                </form>
+            </div>
             {isSubmitted && formData && <Card data={formData} />}
-        </div>
+        </>
     )
 }
 

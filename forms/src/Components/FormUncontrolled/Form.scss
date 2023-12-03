@@ -1,0 +1,78 @@
+.form_container {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    p {
+        color: rgba(46, 2, 73, 0.30);
+    }
+
+    form {
+        background-color: #EEEEEE;
+        width: 60%;
+        padding: 40px;
+        border-radius: 15px;
+    }
+
+    .select_container {
+        display: flex;
+        align-items: center;
+
+        label {
+            display: contents;
+
+        }
+    }
+
+    .button_submit {
+        border-radius: 16px;
+        background: #A91079;
+        color: #EEE;
+        text-align: center;
+        gap: 16px;
+        font-size: 20px;
+    }
+
+    .custom-file-input::-webkit-file-upload-button {
+        visibility: hidden;
+    }
+
+    .custom-file-input::before {
+        content: 'Select some files';
+        color: #A91079;
+        display: inline-block;
+        background: #fff;
+        border: 1px solid #A91079;
+        border-radius: 3px;
+        padding: 5px 8px;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .custom-file-input:active {
+        outline: 0;
+    }
+
+    input {
+        width: 95%;
+        height: 30px;
+        border: none;
+        background-color: #EEEEEE;
+        border-bottom: solid 1px #A91079;
+        color: #A91079;
+
+        &[type=radio] {
+            width: 15px;
+        }
+
+        &[type=checkbox] {
+            width: 20px;
+        }
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+}

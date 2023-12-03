@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import './FormUncontrolled.scss';
+import './Form.scss';
 import { RootState } from '../../store';
 import { useEffect, useState } from 'react';
 import { fetchCountries } from '../../slice/CountriesSlice';
@@ -64,89 +64,92 @@ function FormUncontrolled() {
         setSubmitted(true);
     };
     return (
-        <div className="form_container">
-            <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
-                <label>
-                    Your Name:
-                    <input name="name" value={formValues.name} onChange={handleInputChange} />
-                    {formErrors.name && <p>{formErrors.name}</p>}
-                </label>
-                <label>
-                    Your age:
-                    <input name="age" type="number" value={formValues.age} onChange={handleInputChange} />
-                    {formErrors.age && <p>{formErrors.age}</p>}
-                </label>
-                <label>
-                    Gmail:
-                    <input name="gmail" value={formValues.gmail} onChange={handleInputChange} />
-                    {formErrors.gmail && <p>{formErrors.gmail}</p>}
-                </label>
-                <div>
+        <>
+            <div className="form_container">
+                <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
                     <label>
-                        Выберите страну:
-                        <input name="country" list="countries" value={formValues.country} onChange={handleInputChange} />
-                        <datalist id="countries">
-                            {countries.map((country) => (
-                                <option key={country} value={country} />
-                            ))}
-                        </datalist>
-                        {formErrors.country && <p>{formErrors.country}</p>}
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        Gender:
-                        <input type="radio" name="gender" value="male" checked={formValues.gender === "male"} onChange={handleInputChange} />
-                        Male
+                        <h4> Your Name:</h4>
+                        <input name="name" value={formValues.name} onChange={handleInputChange} />
+                        {formErrors.name && <p>{formErrors.name}</p>}
                     </label>
                     <label>
-                        <input type="radio" name="gender" value="female" checked={formValues.gender === "female"} onChange={handleInputChange} />
-                        Female
+                        <h4> Your age:</h4>
+                        <input name="age" type="number" value={formValues.age} onChange={handleInputChange} />
+                        {formErrors.age && <p>{formErrors.age}</p>}
                     </label>
-                    {formErrors.gender && <p>{formErrors.gender}</p>}
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input name="password" type="password" value={formValues.password} onChange={handleInputChange} />
-                    {formErrors.password && <p>{formErrors.password}</p>}
-                </div>
-                <div>
-                    <label>Password Again</label>
-                    <input name="confirmPassword" type="password" value={formValues.confirmPassword} onChange={handleInputChange} />
-                    {formErrors.confirmPassword && <p>{formErrors.confirmPassword}</p>}
-                </div>
-                <div>
                     <label>
-                        Upload Image:
-                        <input
-                            name="image"
-                            type="file"
-                            accept=".png, .jpeg, .jpg"
-                            onChange={(e) => {
-                                const file = e.target.files?.[0];
-                                if (file) {
-                                    const reader = new FileReader();
-                                    reader.onloadend = () => {
-                                        setFormValues((prevValues) => ({ ...prevValues, image: reader.result as string }));
-                                    };
-                                    reader.readAsDataURL(file);
-                                }
-                            }}
-                        />
+                        <h4>Gmail:</h4>
+                        <input name="gmail" value={formValues.gmail} onChange={handleInputChange} />
+                        {formErrors.gmail && <p>{formErrors.gmail}</p>}
                     </label>
-                    {formErrors.image && <p>{formErrors.image}</p>}
-                </div>
-                <div>
-                    <label>
-                        Accept Terms and Conditions:
-                        <input name="acceptTerms" type="checkbox" checked={formValues.acceptTerms} onChange={handleInputChange} />
-                    </label>
-                    {formErrors.acceptTerms && <p>{formErrors.acceptTerms}</p>}
-                </div>
-                <input type="submit" disabled={!isFormValid} />
-            </form>
+                    <div>
+                        <label>
+                            <h4>Select a country:</h4>
+                            <input name="country" list="countries" value={formValues.country} onChange={handleInputChange} />
+                            <datalist id="countries">
+                                {countries.map((country) => (
+                                    <option key={country} value={country} />
+                                ))}
+                            </datalist>
+                            {formErrors.country && <p>{formErrors.country}</p>}
+                        </label>
+                    </div>
+                    <div className="select_container">
+                        <h4>Gender:</h4>
+                        <label>
+                            <input type="radio" name="gender" value="male" checked={formValues.gender === "male"} onChange={handleInputChange} />
+                            Male
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="female" checked={formValues.gender === "female"} onChange={handleInputChange} />
+                            Female
+                        </label>
+                        {formErrors.gender && <p>{formErrors.gender}</p>}
+                    </div>
+                    <div>
+                        <h4>Password</h4>
+                        <input name="password" type="password" value={formValues.password} onChange={handleInputChange} />
+                        {formErrors.password && <p>{formErrors.password}</p>}
+                    </div>
+                    <div>
+                        <h4>Password Again</h4>
+                        <input name="confirmPassword" type="password" value={formValues.confirmPassword} onChange={handleInputChange} />
+                        {formErrors.confirmPassword && <p>{formErrors.confirmPassword}</p>}
+                    </div>
+                    <div>
+                        <label>
+                            <h4>Upload Image:</h4>
+                            <input
+                                className="custom-file-input"
+                                name="image"
+                                type="file"
+                                accept=".png, .jpeg, .jpg"
+                                onChange={(e) => {
+                                    const file = e.target.files?.[0];
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => {
+                                            setFormValues((prevValues) => ({ ...prevValues, image: reader.result as string }));
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }}
+                            />
+                        </label>
+                        {formErrors.image && <p>{formErrors.image}</p>}
+                    </div>
+                    <div>
+                        <label className="select_container">
+                            <h4>Accept Terms and Conditions:</h4>
+                            <input name="acceptTerms" type="checkbox" checked={formValues.acceptTerms} onChange={handleInputChange} />
+                        </label>
+                        {formErrors.acceptTerms && <p>{formErrors.acceptTerms}</p>}
+                    </div>
+                    <input className="button_submit" type="submit" disabled={!isFormValid} />
+                </form>
+            </div>
             {isSubmitted && formData && <Card data={formData} />}
-        </div>
+        </>
     );
 }
 export default FormUncontrolled;
