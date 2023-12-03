@@ -9,6 +9,8 @@ import "./index.scss";
 import NotFound from "./Components/NotFound/NotFound.tsx";
 import FormUncontrolled from "./Components/FormUncontrolled/FormUncontrolled.tsx";
 import FormHook from "./Components/FormHook/FormHook.tsx";
+import { Provider } from "react-redux";
+import store from "./store.ts";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );
