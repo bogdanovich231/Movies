@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IFormInput } from "../Interfaces/Interfaces";
 
-
-
 const formSlice = createSlice({
-  name: 'form',
+  name: "form",
   initialState: { data: {} as IFormInput },
   reducers: {
     setFormData: (state, action) => {

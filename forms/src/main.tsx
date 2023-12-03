@@ -1,10 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.scss";
 import NotFound from "./Components/NotFound/NotFound.tsx";
 import FormUncontrolled from "./Components/FormUncontrolled/FormUncontrolled.tsx";
@@ -26,7 +23,7 @@ const router = createBrowserRouter([
         path: "formhook",
         element: <FormHook />,
       },
-    ]
+    ],
   },
 ]);
 

@@ -1,19 +1,19 @@
 .header {
-    background-color: #EEEEEE;
-    padding: 25px;
+  background-color: #eeeeee;
+  padding: 25px;
 
-    ul {
-        display: flex;
-        justify-content: flex-end;
-        column-gap: 10px;
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 10px;
 
-        li {
-            list-style: none;
+    li {
+      list-style: none;
 
-            a {
-                text-decoration: none;
-                color: black;
-            }
-        }
+      a {
+        text-decoration: none;
+        color: black;
+      }
     }
+  }
 }
