@@ -7,4 +7,5 @@ export interface IFormInput {
     confirmPassword: string;
     acceptTerms: boolean;
     image: string;
+    country: string;
 }

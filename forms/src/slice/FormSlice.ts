@@ -1,27 +1,18 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { IFormInput } from "../Interfaces/Interfaces";
-import { RootState } from "../store";
 
 
-interface FormState {
-  data: IFormInput | null;
-}
-
-const initialState: FormState = {
-  data: null,
-};
 
 const formSlice = createSlice({
-  name: "form",
-  initialState,
+  name: 'form',
+  initialState: { data: {} as IFormInput },
   reducers: {
-    setFormData: (state, action: PayloadAction<IFormInput>) => {
+    setFormData: (state, action) => {
       state.data = action.payload;
     },
   },
 });
 
 export const { setFormData } = formSlice.actions;
-export const selectFormData = (state: RootState) => state.form.data;
 
 export default formSlice.reducer;

@@ -24,7 +24,7 @@ export const schema = yup.object().shape({
         .required("Image is a required field")
         .test("fileSize", "File size is too large", (value) => {
             if (!value) return true;
-            const maxSize = 5 * 1024 * 1024; // 5 MB
+            const maxSize = 5 * 1024 * 1024;
             const base64Size = (value.length * (3 / 4)) - 2;
             return base64Size <= maxSize;
         })
@@ -34,4 +34,5 @@ export const schema = yup.object().shape({
             const base64Type = value.split(",")[0].split(":")[1].split(";")[0];
             return validTypes.includes(base64Type);
         }),
+    country: yup.string().required("Country is a required field"),
 });
