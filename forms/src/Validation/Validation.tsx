@@ -11,11 +11,16 @@ export const schema = yup.object().shape({
     password: yup.string()
         .required("Password is a required field")
         .min(8, "Password must be at least 8 characters")
-        .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-        .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-        .matches(/\d/, "Password must contain at least one number")
-        .matches(/[!@#$%^&*(),.?":{}|<>]/, "Password must contain at least one special character"),
+        .test("password-strength", "Password is not strong enough", (value) => {
+            if (!value) return true;
 
+            const hasUppercase = /[A-Z]/.test(value);
+            const hasLowercase = /[a-z]/.test(value);
+            const hasDigit = /\d/.test(value);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+
+            return hasUppercase && hasLowercase && hasDigit && hasSpecialChar;
+        }),
     confirmPassword: yup.string()
         .oneOf([yup.ref('password')], 'The passwords dont match '),
     acceptTerms: yup.boolean().oneOf([true], "You must accept the Terms and Conditions"),
