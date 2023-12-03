@@ -15,6 +15,7 @@ function FormHook() {
     const formData = useSelector((state: RootState) => state.form.data);
     const countries = useSelector((state: RootState) => state.countries.list);
     const [isSubmitted, setSubmitted] = useState(false);
+    const [isFormValid, setFormValid] = useState(true);
 
     const {
         setValue,
@@ -33,6 +34,11 @@ function FormHook() {
     useEffect(() => {
         dispatch(fetchCountries() as any);
     }, [dispatch]);
+
+    useEffect(() => {
+        const isFormValid = Object.keys(errors).length === 0;
+        setFormValid(isFormValid);
+    }, [errors]);
 
     console.log(watch("name"));
     console.log(watch("age"));
@@ -121,7 +127,7 @@ function FormHook() {
                     </label>
                     {errors.acceptTerms && <p>{errors.acceptTerms.message}</p>}
                 </div>
-                <input type="submit" />
+                <input type="submit" disabled={!isFormValid} />
             </form>
             {isSubmitted && formData && <Card data={formData} />}
         </div>

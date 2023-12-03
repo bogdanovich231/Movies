@@ -13,6 +13,7 @@ function FormUncontrolled() {
     const formData = useSelector((state: RootState) => state.form.data);
     const countries = useSelector((state: RootState) => state.countries.list);
     const [isSubmitted, setSubmitted] = useState(false);
+    const [isFormValid, setFormValid] = useState(true);
     const [formValues, setFormValues] = useState<IFormInput>({
         name: "",
         age: 0,
@@ -38,14 +39,12 @@ function FormUncontrolled() {
             [name]: type === "checkbox" ? checked : value,
         }));
     };
-
-    const onSubmit = () => {
+    const validateForm = () => {
         schema
             .validate(formValues, { abortEarly: false })
             .then(() => {
-                console.log("Form is valid");
-                dispatch(setFormData(formValues));
-                setSubmitted(true);
+                setFormErrors({});
+                setFormValid(true);
             })
             .catch((err) => {
                 const validationErrors: IFormErrors = {};
@@ -53,9 +52,17 @@ function FormUncontrolled() {
                     validationErrors[error.path as keyof IFormErrors] = error.message;
                 });
                 setFormErrors(validationErrors);
+                setFormValid(false);
             });
     };
+    useEffect(() => {
+        validateForm();
+    }, [formValues]);
 
+    const onSubmit = () => {
+        dispatch(setFormData(formValues));
+        setSubmitted(true);
+    };
     return (
         <div className="form_container">
             <form onSubmit={(e) => { e.preventDefault(); onSubmit(); }}>
@@ -136,7 +143,7 @@ function FormUncontrolled() {
                     </label>
                     {formErrors.acceptTerms && <p>{formErrors.acceptTerms}</p>}
                 </div>
-                <input type="submit" />
+                <input type="submit" disabled={!isFormValid} />
             </form>
             {isSubmitted && formData && <Card data={formData} />}
         </div>
