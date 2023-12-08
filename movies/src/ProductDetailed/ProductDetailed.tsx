@@ -10,12 +10,15 @@ import IMovie from '../Types/Types';
 function ProductDetailed() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const movie = useSelector((state: RootState) => state.rootReducer.movieDetails.movie as IMovie | null);
+  const movie = useSelector((state: RootState) => state.rootReducer.movieDetails.movie);
+  console.log('Movie from Redux state:', movie);
   const loading = useSelector((state: RootState) => state.rootReducer.movieDetails.loading);
   const navigate = useNavigate();
 
   const { data: result } = useGetMovieByIdQuery(parseInt(id || ''));
-
+  console.log('ProductDetailed component is rendering');
+  console.log('Movie ID from URL:', id);
+  console.log('Query result:', result);
   useEffect(() => {
     const fetchMovieDetails = async () => {
       if (!id) {
@@ -26,7 +29,7 @@ function ProductDetailed() {
         dispatch(setLoading(true));
 
         if (result && 'data' in result) {
-          const movieData = result.data;
+          const movieData: IMovie = result.data.movie;
 
           console.log('Movie data:', movieData);
 
@@ -58,9 +61,6 @@ function ProductDetailed() {
     );
   }
 
-  if (!movie) {
-    return <div>Movie not found</div>;
-  }
 
   const handleOnCloseClick = () => {
     navigate('/');
@@ -68,18 +68,20 @@ function ProductDetailed() {
 
   return (
     <div className="product_detailed">
-      <div className="button">
-        <button onClick={handleOnCloseClick}>X</button>
-      </div>
-      <div className="img">
-        <img src={movie.large_cover_image} alt={movie.title} />
-      </div>
-      <div className="information">
-        <p>Movie ID: {movie.id}</p>
-        <h3>{movie.title}</h3>
-        <p className="description">{movie.rating}</p>
-        <p className="release_date">{movie.year}</p>
-      </div>
+      {!movie && <div>Movie not found</div>}
+      {movie && (
+        <>
+          <div className="img">
+            <img src={movie.large_cover_image} alt={movie.title} />
+          </div>
+          <div className="information">
+            <p>Movie ID: {movie.id}</p>
+            <h3>{movie.title}</h3>
+            <p className="description">{movie.rating}</p>
+            <p className="release_date">{movie.year}</p>
+          </div>
+        </>
+      )}
     </div>
   );
 }

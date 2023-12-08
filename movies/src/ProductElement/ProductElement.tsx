@@ -1,13 +1,15 @@
 import IMovie from '../Types/Types';
 import './ProductElement.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function ProductElement({ movie }: { movie: IMovie }) {
   const navigate = useNavigate();
+  const { page } = useParams();
 
   const openModal = () => {
-    navigate(`/movie/${movie.id}`);
+    navigate(`/page/${page ?? 1}/movie/${movie.id}`);
   };
+
   return (
     <div className="product">
       <div className="img">

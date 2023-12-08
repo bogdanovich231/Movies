@@ -11,30 +11,28 @@ const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));
 
 function App() {
   return (
-    <Router>
-      <MainPage />
+    <Suspense fallback={<Loading />}>
+      <Router>
+        <MainPage />
         <Routes>
           <Route
             path="/"
             element={
-              <Suspense fallback={<Loading />}>
-                <CatalogProducts />
-              </Suspense>
+              <CatalogProducts />
             }
           />
           <Route
             path="page/:pageNumber"
             element={
-              <Suspense fallback={<Loading />}>
-                <CatalogProducts />
-              </Suspense>
+              <CatalogProducts />
             }
           />
-           <Route path="/movie/:id/" element={<ProductDetailed />} />
+          <Route path="page/:pageNumber/movie/:id" element={<ProductDetailed />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
-    </Router>
+      </Router>
+    </Suspense>
   );
 }
 

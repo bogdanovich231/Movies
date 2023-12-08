@@ -1,21 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import IMovie, { MovieDetailsState } from '../../Types/Types';
 
-const productDetailSlice = createSlice({
+const initialState: MovieDetailsState = {
+  movie: null,
+  loading: false,
+};
+
+const movieDetailsSlice = createSlice({
   name: 'movieDetails',
-  initialState: {
-    movie: null,
-    loading: true,
-  },
+  initialState,
   reducers: {
-    setMovie: (state, action) => {
+    setMovie: (state, action: PayloadAction<IMovie>) => {
       state.movie = action.payload;
     },
-    setLoading: (state, action) => {
+    setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
   },
 });
 
-export const { setMovie, setLoading } = productDetailSlice.actions;
-export default productDetailSlice.reducer;
- 
+export const { setMovie, setLoading } = movieDetailsSlice.actions;
+export default movieDetailsSlice.reducer;
