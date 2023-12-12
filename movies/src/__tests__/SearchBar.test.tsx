@@ -8,7 +8,7 @@ const mockStore = configureStore([]);
 
 describe('Search Component', () => {
   it('saves the entered value to local storage when the search button is clicked', async () => {
-    const store = mockStore({}); 
+    const store = mockStore({});
     render(
       <Provider store={store}>
         <Search />
@@ -29,10 +29,10 @@ describe('Search Component', () => {
     const initialState = {
       search: { query: 'The Dark Knight' },
     };
-    const store = mockStore(initialState); 
+    const store = mockStore(initialState);
     render(
       <Provider store={store}>
-        <Search  />
+        <Search />
       </Provider>
     );
 

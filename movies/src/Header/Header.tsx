@@ -9,7 +9,7 @@ function Header() {
       <h1>
         <Link to={`/`}>Movies</Link>
       </h1>
-      <Search  />
+      <Search />
       <ShowError />
       <Outlet />
     </div>

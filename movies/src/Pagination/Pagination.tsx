@@ -38,13 +38,9 @@ const Pagination: FC<PaginationProps> = ({ totalPages, onPageChange }) => {
     </button>
   ));
 
-  const middleDots = totalPages > visiblePages * 2 + 1 && (
-    <span className="pagination_dots">...</span>
-  );
+  const middleDots = totalPages > visiblePages * 2 + 1 && <span className="pagination_dots">...</span>;
 
-  const currentPage = totalPages > visiblePages * 2 && (
-    <button className="active">{reduxCurrentPage}</button>
-  );
+  const currentPage = totalPages > visiblePages * 2 && <button className="active">{reduxCurrentPage}</button>;
 
   return (
     <div className="pagination">

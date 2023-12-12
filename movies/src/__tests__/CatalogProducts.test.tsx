@@ -42,7 +42,7 @@ describe('CatalogProducts Component', () => {
       movie1Elements.forEach((element) => {
         expect(element).toBeInTheDocument();
       });
-    
+
       expect(screen.getByText('Movie 2')).toBeInTheDocument();
     });
   });

@@ -5,6 +5,28 @@
     background: white;
     border-radius: 15px;
 
+    .information {
+        display: flex;
+        gap: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin-left: 15px;
+    }
+
+    .meta_data_container {
+        display: flex;
+        gap: 15px;
+
+        .rating {
+            color: #868D86;
+        }
+
+        .release_date {
+            color: #868D86;
+        }
+    }
+
     img {
         height: 300px;
         border-radius: 15px 0px 0px 15px;
@@ -13,10 +35,11 @@
     .release_date {
         color: #E50914;
     }
-    button{
+
+    button {
         border: none;
         background: #E50914;
-        border-radius: 15px;
+        border-radius: 20px;
         padding: 10px 15px;
         color: #ffff;
     }

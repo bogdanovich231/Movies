@@ -9,6 +9,7 @@ import { useGetMoviesQuery } from '../Api/Api';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTotalPages, setCurrentPage, setProducts, setLoading } from '../store/Catalog/catalog.slice';
 import { RootState } from '../store/store';
+import PageSelect from '../PageSelect/PageSelect';
 
 function CatalogProducts() {
   const dispatch = useDispatch();
@@ -47,15 +48,14 @@ function CatalogProducts() {
 
   return (
     <>
+      <PageSelect />
       <div className="catalog">
         {isLoading ? (
           <Loading />
         ) : (
           <>
             {searchResults?.data.movies && searchResults.data.movies.length > 0 ? (
-              searchResults.data.movies.map((movie: IMovie) => (
-                <ProductElement key={movie.id} movie={movie} />
-              ))
+              searchResults.data.movies.map((movie: IMovie) => <ProductElement key={movie.id} movie={movie} />)
             ) : (
               <div>Error loading data</div>
             )}

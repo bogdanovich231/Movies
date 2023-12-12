@@ -4,6 +4,9 @@ export default interface IMovie {
   year: number;
   id: number;
   rating: number;
+  description_full: string;
+  genres: [string];
+  yt_trailer_code: string;
 }
 
 export interface IPaginationData {
@@ -12,7 +15,7 @@ export interface IPaginationData {
   limit: number;
 }
 export interface IDataResponse {
-  movies: IMovie[],
+  movies: IMovie[];
   total_pages: number;
   movie_count: number;
   limit: number;
@@ -24,7 +27,6 @@ export interface CatalogProductsProps {
 }
 export interface RootState {
   catalog: CatalogProductsProps;
-
 }
 export interface SearchProps {
   updateSearchResults: (results: IMovie[] | undefined) => void;

@@ -17,8 +17,10 @@ function ProductElement({ movie }: { movie: IMovie }) {
       </div>
       <div className="information">
         <h3>{movie.title}</h3>
-        <p className="rating">{movie.rating}</p>
-        <p className="release_date">{movie.year}</p>
+        <div className="meta_data_container">
+          <p className="rating">{movie.rating}</p>
+          <p className="release_date">Release: {movie.year}</p>
+        </div>
         <div className="button">
           <button onClick={openModal}>View details</button>
         </div>

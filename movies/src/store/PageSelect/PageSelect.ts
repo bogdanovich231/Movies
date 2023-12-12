@@ -1,4 +1,3 @@
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface PageSizeState {
@@ -6,7 +5,7 @@ interface PageSizeState {
 }
 
 const initialState: PageSizeState = {
-  value: 10, 
+  value: 10,
 };
 
 const pageSizeSlice = createSlice({
