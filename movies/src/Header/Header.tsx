@@ -10,7 +10,12 @@ function Header() {
         <Link to={`/`}>Movies</Link>
       </h1>
       <Search />
-      <ShowError />
+      <div className="btn_container">
+        <Link to={`/autorization`}>Sign in</Link>
+        <Link to={`/register`}>Sign Up</Link>
+        <ShowError />
+      </div>
+
       <Outlet />
     </div>
   );

@@ -2,6 +2,18 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-bottom: solid 0.1px #cbcbcb69;
+    margin-top: 30px;
+
+    .btn_container {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+        a {
+            font-size: 20px;
+        }
+    }
 
     a {
         color: #E50914;
