@@ -5,7 +5,7 @@ interface PageSizeState {
 }
 
 const initialState: PageSizeState = {
-  value: 10,
+  value: 20,
 };
 
 const pageSizeSlice = createSlice({

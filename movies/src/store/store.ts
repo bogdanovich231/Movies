@@ -7,6 +7,7 @@ import paginationReducer from './Pagination/Pagination.slice';
 import catalogReducer from './Catalog/catalog.slice';
 import movieDetailsReducer from './Detailed/Detailed.slice';
 import pageSelectReducer from './PageSelect/PageSelect';
+import genresReducer from './Genres/Genres';
 
 export const rootReducer = combineReducers({
   search: searchReducer,
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
   catalog: catalogReducer,
   movieDetails: movieDetailsReducer,
   pageSize: pageSelectReducer,
+  genres: genresReducer,
 });
 
 export const store = configureStore({

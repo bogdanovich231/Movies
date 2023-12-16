@@ -1,0 +1,20 @@
+.categories {
+    ul {
+        color: white;
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        cursor: pointer;
+
+        li {
+            padding: 10px 15px;
+            border: solid 1px #E50914;
+            border-radius: 17px;
+        }
+
+        .selected {
+            background-color: #E50914;
+            color: white;
+        }
+    }
+}

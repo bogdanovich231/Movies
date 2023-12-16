@@ -41,3 +41,9 @@ export interface MovieDetailsState {
   movie: IMovie | null;
   loading: boolean;
 }
+
+export interface IGenresState {
+  genres: string[];
+  selectedGenre: string | null;
+  moviesByGenre: { [key: string]: IMovie[] };
+}

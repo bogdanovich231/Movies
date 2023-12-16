@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { setPageSize } from '../store/PageSelect/PageSelect';
-
+import './PageSelect.scss'
 const PageSelect: React.FC = () => {
   const dispatch = useDispatch();
   const pageSize = useSelector((state: RootState) => state.rootReducer.pageSize.value);
