@@ -47,3 +47,10 @@ export interface IGenresState {
   selectedGenre: string | null;
   moviesByGenre: { [key: string]: IMovie[] };
 }
+
+export interface IFormInput {
+  name: string;
+  email: string;
+  password: string;
+  againPassword?: string;
+}
