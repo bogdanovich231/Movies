@@ -30,10 +30,13 @@ function Categories() {
   }, [dispatch, genres, searchResults]);
 
   const handleGenreClick = (genre: string) => {
-    dispatch(selectGenre(genre));
-    dispatch(setCurrentPage(1));
+    if (genre === selectedGenre) {
+      dispatch(selectGenre(''));
+    } else {
+      dispatch(selectGenre(genre));
+      dispatch(setCurrentPage(1));
+    }
   };
-
   return (
     <div className="categories">
       <ul>

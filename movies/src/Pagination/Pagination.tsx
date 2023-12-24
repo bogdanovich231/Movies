@@ -7,7 +7,7 @@ import { setCurrentPage } from '../store/Pagination/Pagination.slice';
 
 const Pagination: FC<PaginationProps> = ({ totalPages, onPageChange }) => {
   const dispatch = useDispatch();
-  const reduxCurrentPage = useSelector((state: RootState) => state.rootReducer.pagination.currentPage);
+  const CurrentPage = useSelector((state: RootState) => state.rootReducer.pagination.currentPage);
 
   const handlePageChange = (page: number) => {
     dispatch(setCurrentPage(page));
@@ -22,17 +22,17 @@ const Pagination: FC<PaginationProps> = ({ totalPages, onPageChange }) => {
     <button
       key={pageNumber}
       onClick={() => handlePageChange(pageNumber)}
-      className={reduxCurrentPage === pageNumber ? 'active' : 'pagination_btn'}
+      className={CurrentPage === pageNumber ? 'active' : 'pagination_btn'}
     >
       {pageNumber}
     </button>
   ));
 
-  const lastPages = pageNumbers.slice(totalPages - visiblePages, totalPages).map((pageNumber) => (
+  const lastPages = pageNumbers.slice(totalPages - visiblePages).map((pageNumber) => (
     <button
       key={pageNumber}
       onClick={() => handlePageChange(pageNumber)}
-      className={reduxCurrentPage === pageNumber ? 'active' : 'pagination_btn'}
+      className={CurrentPage === pageNumber ? 'active' : 'pagination_btn'}
     >
       {pageNumber}
     </button>
@@ -40,26 +40,46 @@ const Pagination: FC<PaginationProps> = ({ totalPages, onPageChange }) => {
 
   const middleDots = totalPages > visiblePages * 2 + 1 && <span className="pagination_dots">...</span>;
 
-  const currentPage = totalPages > visiblePages * 2 && <button className="active">{reduxCurrentPage}</button>;
+  const currentPageElement = <button key={CurrentPage} className="active">{CurrentPage}</button>;
+
+  const renderPages = () => {
+    if (totalPages <= 7) {
+      return pageNumbers.map((pageNumber) => (
+        <button
+          key={pageNumber}
+          onClick={() => handlePageChange(pageNumber)}
+          className={CurrentPage === pageNumber ? 'active' : 'pagination_btn'}
+        >
+          {pageNumber}
+        </button>
+      ));
+    } else {
+      return (
+        <>
+          {firstPages}
+          {middleDots}
+          {currentPageElement}
+          {middleDots}
+          {lastPages}
+        </>
+      );
+    }
+  };
 
   return (
     <div className="pagination">
       <button
         className="pagination_btn pagination_btn_left"
-        onClick={() => handlePageChange(reduxCurrentPage - 1)}
-        disabled={reduxCurrentPage === 1}
+        onClick={() => handlePageChange(CurrentPage - 1)}
+        disabled={CurrentPage === 1}
       >
         &#60;
       </button>
-      {firstPages}
-      {middleDots}
-      {currentPage}
-      {middleDots}
-      {lastPages}
+      {renderPages()}
       <button
         className="pagination_btn pagination_btn_right"
-        onClick={() => handlePageChange(reduxCurrentPage + 1)}
-        disabled={reduxCurrentPage === totalPages}
+        onClick={() => handlePageChange(CurrentPage + 1)}
+        disabled={CurrentPage === totalPages}
       >
         &#62;
       </button>
