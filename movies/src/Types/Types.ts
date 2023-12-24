@@ -54,3 +54,7 @@ export interface IFormInput {
   password: string;
   againPassword?: string;
 }
+
+export interface FavoriteMoviesListProps {
+  userId: string;
+}

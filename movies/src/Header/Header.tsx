@@ -24,6 +24,7 @@ function Header() {
         <Link to={`/`}>Movies</Link>
       </h1>
       <Search />
+      <Link to={'favorite'}>favorite</Link>
       {isLoggedIn ? (
         <LogOut />
       ) : (
