@@ -40,7 +40,11 @@ const Pagination: FC<PaginationProps> = ({ totalPages, onPageChange }) => {
 
   const middleDots = totalPages > visiblePages * 2 + 1 && <span className="pagination_dots">...</span>;
 
-  const currentPageElement = <button key={CurrentPage} className="active">{CurrentPage}</button>;
+  const currentPageElement = (
+    <button key={CurrentPage} className="active">
+      {CurrentPage}
+    </button>
+  );
 
   const renderPages = () => {
     if (totalPages <= 7) {

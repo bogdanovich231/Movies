@@ -1,0 +1,20 @@
+li {
+    color: aliceblue;
+}
+
+p,
+h2 {
+    color: aliceblue;
+}
+
+.favorite_button {
+    border-radius: 30px;
+    padding: 10px;
+    background-color: red;
+    border: none;
+
+    img {
+        display: flex;
+        align-items: center;
+    }
+}

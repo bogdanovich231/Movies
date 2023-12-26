@@ -4,6 +4,7 @@ import { addToFavorites } from '../Helper/favorites';
 import { RootState } from '../store/store';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import favoriteButton from '../assets/heart.svg';
+import './Favorite.scss';
 
 function FavoriteButton() {
   const [user, setUser] = useState<User | null>(null);
@@ -32,14 +33,12 @@ function FavoriteButton() {
   const handleAddToFavorites = () => {
     if (movieId) {
       addToFavorites(uid, movieId.toString());
-      console.log('Uid: ', uid);
-      console.log('MovieId: ', movieId);
     }
   };
 
   return (
-    <button onClick={handleAddToFavorites}>
-      <img src={favoriteButton} alt="" />
+    <button className="favorite_button" onClick={handleAddToFavorites}>
+      <img src={favoriteButton} alt="favorite" />
     </button>
   );
 }
