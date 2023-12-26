@@ -7,6 +7,7 @@ import NotFound from './NotFound/NotFound';
 import Footer from './Footer/Footer';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
+import FavoriteList from './Favorite/FavoriteList';
 
 const CatalogProducts = lazy(() => import('./CatalogProducts/CatalogProducts'));
 const ProductDetailed = lazy(() => import('./ProductDetailed/ProductDetailed'));
@@ -22,6 +23,7 @@ function App() {
           <Route path="page/:pageNumber/movie/:id" element={<ProductDetailed />} />
           <Route path="autorization" element={<SignIn />} />
           <Route path="register" element={<SignUp />} />
+          <Route path="favorite" element={<FavoriteList />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
