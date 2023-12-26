@@ -51,19 +51,33 @@
         .install_btn {
             border: none;
             border-radius: 30px;
-            padding: 15px 25px;
+            padding: 10px 15px;
             color: white;
             background: red;
             font-size: 20px;
-            margin-top: 15px;
         }
 
         .description {
-
-
             h1 {
                 font-size: 70px;
             }
+        }
+
+        button {
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.10);
+                background: linear-gradient(135deg, #ff0b03 46.91%, #ffffff);
+                transition: 1s;
+            }
+        }
+
+        .container_button {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
         }
     }
 

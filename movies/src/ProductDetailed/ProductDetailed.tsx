@@ -9,6 +9,7 @@ import IMovie from '../Types/Types';
 import './ProductDetailed.scss';
 import zipperGrey from '../assets/zipper_grey.png';
 import zipperGreen from '../assets/zipper_green.png';
+import FavoriteButton from '../Favorite/FavoriteButton';
 
 function ProductDetailed() {
   const { id } = useParams();
@@ -19,9 +20,7 @@ function ProductDetailed() {
   const navigate = useNavigate();
 
   const { data: result } = useGetMovieByIdQuery(parseInt(id || ''));
-  console.log('ProductDetailed component is rendering');
-  console.log('Movie ID from URL:', id);
-  console.log('Query result:', result);
+
   useEffect(() => {
     const fetchMovieDetails = async () => {
       if (!id) {
@@ -33,8 +32,6 @@ function ProductDetailed() {
 
         if (result && 'data' in result) {
           const movieData: IMovie = result.data.movie;
-
-          console.log('Movie data:', movieData);
 
           if (movieData) {
             dispatch(setMovie(movieData));
@@ -53,8 +50,6 @@ function ProductDetailed() {
 
     fetchMovieDetails();
   }, [dispatch, id, result]);
-
-  console.log('Movie:', movie);
 
   if (loading) {
     return (
@@ -87,18 +82,27 @@ function ProductDetailed() {
             {movie.description_full ? (
               <p className="description">{`${movie.description_full.slice(0, 500)}...`}</p>
             ) : null}
-            <button className=" install_btn">Install movie</button>
+            <div className="container_button">
+              <button className=" install_btn">Install movie</button>
+              <FavoriteButton />
+            </div>
           </div>
-          <div className="trailer">
-            <iframe
-              width={1000}
-              height={500}
-              src={`https://www.youtube.com/embed/${movie.yt_trailer_code}`}
-              title={`Trailer for ${movie.title}`}
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-          </div>
+          {movie.yt_trailer_code ? (
+            <div className="trailer">
+              <iframe
+                width={1000}
+                height={500}
+                src={`https://www.youtube.com/embed/${movie.yt_trailer_code}`}
+                title={`Trailer for ${movie.title}`}
+                frameBorder="0"
+                allowFullScreen
+              ></iframe>
+            </div>
+          ) : (
+            <div className="img">
+              <img src={movie.large_cover_image} alt="" />
+            </div>
+          )}
         </>
       )}
     </div>
