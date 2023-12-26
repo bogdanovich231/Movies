@@ -17,7 +17,7 @@ function Categories() {
   const { data: searchResults } = useGetMoviesQuery({ query, page: currentPage, pageSize });
 
   useEffect(() => {
-    if (searchResults) {
+    if (searchResults && searchResults.data && searchResults.data.movies) {
       const moviesByGenre: Record<string, IMovie[]> = {};
       genres.forEach((genre) => {
         moviesByGenre[genre] = searchResults.data.movies.filter((movie) => movie.genres.includes(genre));
@@ -47,19 +47,17 @@ function Categories() {
       <div className="menu-button" onClick={toggleMenu}>
         Categories
       </div>
-      <div className="nav_container">
-        <ul>
-          {genres.map((genre: string) => (
-            <li
-              key={genre}
-              onClick={() => handleGenreClick(genre)}
-              className={genre === selectedGenre ? 'selected' : ''}
-            >
-              {genre}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <ul>
+        {genres.map((genre: string) => (
+          <li
+            key={genre}
+            onClick={() => handleGenreClick(genre)}
+            className={genre === selectedGenre ? 'selected' : ''}
+          >
+            {genre}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
