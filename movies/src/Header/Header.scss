@@ -12,6 +12,11 @@
 
         a {
             font-size: 20px;
+            color: #ffff;
+
+            &:hover {
+                color: #E50914;
+            }
         }
     }
 

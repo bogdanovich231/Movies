@@ -6,6 +6,7 @@ import './Header.scss';
 import { Outlet, Link } from 'react-router-dom';
 import LogOut from '../LogOut/LogOut';
 import { useEffect, useState } from 'react';
+import favoriteButton from '../assets/heart.svg';
 
 function Header() {
   const [isLoggedIn, setLoggedIn] = useState(!!auth.currentUser);
@@ -24,16 +25,21 @@ function Header() {
         <Link to={`/`}>Movies</Link>
       </h1>
       <Search />
-      <Link to={'favorite'}>favorite</Link>
       {isLoggedIn ? (
-        <LogOut />
+        <div className="btn_container">
+          <LogOut />
+          <Link to={'favorite'}>
+            <img src={favoriteButton} alt="" />
+          </Link>
+          <ShowError />
+        </div>
       ) : (
         <div className="btn_container">
           <Link to={`/autorization`}>Sign in</Link>
           <Link to={`/register`}>Sign Up</Link>
+          <ShowError />
         </div>
       )}
-      <ShowError />
 
       <Outlet />
     </div>
