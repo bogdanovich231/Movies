@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import ShowError from '../ErrorBoundary/ShowError';
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { auth } from '../Helper/auth';
 import Search from '../SearchBar/SearchBar';
 import './Header.scss';
@@ -10,6 +10,17 @@ import favoriteButton from '../assets/heart.svg';
 
 function Header() {
   const [isLoggedIn, setLoggedIn] = useState(!!auth.currentUser);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+    if (menuOpen) {
+      enableBodyScroll(document.body);
+    } else {
+      disableBodyScroll(document.body);
+    }
+  };
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -22,24 +33,43 @@ function Header() {
   return (
     <div className="header">
       <h1>
-        <Link to={`/`}>Movies</Link>
+        <Link className="logo" to={`/`}>
+          Movies
+        </Link>
       </h1>
       <Search />
-      {isLoggedIn ? (
-        <div className="btn_container">
-          <LogOut />
-          <Link to={'favorite'}>
-            <img src={favoriteButton} alt="" />
-          </Link>
-          <ShowError />
+      <nav>
+        <div className={`header_burger-btn ${menuOpen ? 'open' : ''}`} onClick={toggleMenu}>
+          <span></span>
         </div>
-      ) : (
-        <div className="btn_container">
-          <Link to={`/autorization`}>Sign in</Link>
-          <Link to={`/register`}>Sign Up</Link>
-          <ShowError />
-        </div>
-      )}
+        <ul className={`menu ${menuOpen ? 'open' : ''}`}>
+          {isLoggedIn ? (
+            <div className="btn_container">
+              <li>
+                <LogOut />
+              </li>
+              <li>
+                <Link className="favorite_button" to={'favorite'}>
+                  <img src={favoriteButton} alt="" />
+                </Link>
+              </li>
+            </div>
+          ) : (
+            <div className="btn_container">
+              <li>
+                <Link className="auth_button" to={`/autorization`}>
+                  Sign in
+                </Link>
+              </li>
+              <li>
+                <Link className="auth_button" to={`/register`}>
+                  Sign Up
+                </Link>
+              </li>
+            </div>
+          )}
+        </ul>
+      </nav>
 
       <Outlet />
     </div>

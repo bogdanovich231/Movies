@@ -1,10 +1,14 @@
 .logout {
-    color: #fff;
-    background-color: #ffffff00;
     border: none;
+    border-radius: 30px;
+    padding: 10px 15px;
+    color: white;
+    background: #E50914;
     font-size: 20px;
 
     &:hover {
-        color: #E50914;
+        transform: scale(1.1);
+        background: linear-gradient(135deg, #ff0b03 46.91%, #ffffff);
+        transition: 1s;
     }
 }

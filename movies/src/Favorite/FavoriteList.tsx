@@ -3,6 +3,8 @@ import IMovie from '../Types/Types';
 import { getFavorites } from '../Helper/favorites';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import './Favorite.scss';
+import zipperGrey from '../assets/zipper_grey.png';
+import zipperGreen from '../assets/zipper_green.png';
 
 const FavoriteList: React.FC = () => {
   const [favoriteMovies, setFavoriteMovies] = useState<IMovie[]>([]);
@@ -55,17 +57,22 @@ const FavoriteList: React.FC = () => {
   }, [favoriteMovies]);
 
   return (
-    <div>
-      <h2>Favorite Movies</h2>
+    <div className="favorite">
+      <h2 className="favorite_title">Favorite Movies</h2>
       {favoriteMovies.length === 0 ? (
-        <p>No favorite movies</p>
+        <h3>No favorite movies</h3>
       ) : (
-        <ul>
+        <ul className="favorite_list">
           {favoriteMovies.map((movie) => (
-            <li key={movie.id}>
-              <p>{movie.id}</p>
+            <li className="favorite_item" key={movie.id}>
               <img src={movie.large_cover_image} alt={movie.title} />
-              <p>{movie.title}</p>
+              <div className="favorite_item_info">
+                <p>{movie.title}</p>
+                <div className="favorite_item_info_rating">
+                  {movie.rating < 7 ? <img src={zipperGrey} alt="" /> : <img src={zipperGreen} alt="" />}
+                  <p className={`rating ${movie.rating < 7 ? 'grey' : 'green'}`}>{movie.rating}</p>
+                </div>
+              </div>
             </li>
           ))}
         </ul>

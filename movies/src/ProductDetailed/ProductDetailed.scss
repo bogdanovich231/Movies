@@ -3,6 +3,8 @@
     align-items: center;
     color: #fff;
     background: linear-gradient(to right, rgb(0, 0, 0) 35%, rgba(253, 253, 253, 0));
+    margin-top: 5%;
+    margin-bottom: 5%;
 
     .information {
         z-index: 20;
@@ -85,5 +87,35 @@
         z-index: -1;
 
 
+    }
+
+    .img_backup img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1190px) {
+    .product_detailed {
+        display: flex;
+        flex-direction: column;
+
+        .information {
+            width: 90%;
+            margin-right: 5%;
+            margin-left: 11%;
+
+            .img_backup {
+                margin-top: 5%;
+            }
+        }
+
+        .trailer {
+            width: 100%;
+            margin-top: 5%;
+
+            iframe {
+                width: 100%;
+            }
+        }
     }
 }

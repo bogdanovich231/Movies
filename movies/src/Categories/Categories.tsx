@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { selectGenre, setMoviesByGenre } from '../store/Genres/Genres';
 import { useGetMoviesQuery } from '../Api/Api';
 import IMovie from '../Types/Types';
@@ -13,7 +13,7 @@ function Categories() {
   const { query } = useSelector((state: RootState) => state.rootReducer.search);
   const { currentPage } = useSelector((state: RootState) => state.rootReducer.catalog);
   const pageSize = useSelector((state: RootState) => state.rootReducer.pageSize.value);
-
+  const [menuOpen, setMenuOpen] = useState(false);
   const { data: searchResults } = useGetMoviesQuery({ query, page: currentPage, pageSize });
 
   useEffect(() => {
@@ -37,15 +37,29 @@ function Categories() {
       dispatch(setCurrentPage(1));
     }
   };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <div className="categories">
-      <ul>
-        {genres.map((genre: string) => (
-          <li key={genre} onClick={() => handleGenreClick(genre)} className={genre === selectedGenre ? 'selected' : ''}>
-            {genre}
-          </li>
-        ))}
-      </ul>
+    <div className={`categories ${menuOpen ? 'menu-open' : ''}`}>
+      <div className="menu-button" onClick={toggleMenu}>
+        Categories
+      </div>
+      <div className="nav_container">
+        <ul>
+          {genres.map((genre: string) => (
+            <li
+              key={genre}
+              onClick={() => handleGenreClick(genre)}
+              className={genre === selectedGenre ? 'selected' : ''}
+            >
+              {genre}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

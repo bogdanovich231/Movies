@@ -7,6 +7,8 @@ export default interface IMovie {
   description_full: string;
   genres: [string];
   yt_trailer_code: string;
+  background_image_original: string;
+  torrents: { url: string }[];
 }
 
 export interface IPaginationData {

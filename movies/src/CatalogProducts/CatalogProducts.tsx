@@ -70,7 +70,9 @@ function CatalogProducts() {
             {filteredMovies && filteredMovies.length > 0 ? (
               filteredMovies.map((movie: IMovie) => <ProductElement key={movie.id} movie={movie} />)
             ) : (
-              <div>No movies found</div>
+              <div className="movie_notfound">
+                <h3>No movies found</h3>
+              </div>
             )}
           </>
         )}

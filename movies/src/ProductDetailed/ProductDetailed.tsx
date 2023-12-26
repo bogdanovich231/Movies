@@ -83,7 +83,9 @@ function ProductDetailed() {
               <p className="description">{`${movie.description_full.slice(0, 500)}...`}</p>
             ) : null}
             <div className="container_button">
-              <button className=" install_btn">Install movie</button>
+              <button className=" install_btn">
+                <a href={movie.torrents[0].url}>Install movie</a>
+              </button>
               <FavoriteButton />
             </div>
           </div>
@@ -99,8 +101,8 @@ function ProductDetailed() {
               ></iframe>
             </div>
           ) : (
-            <div className="img">
-              <img src={movie.large_cover_image} alt="" />
+            <div className="img_backup ">
+              <img src={movie.background_image_original} alt="" />
             </div>
           )}
         </>
