@@ -49,7 +49,7 @@ function Header() {
                 <LogOut />
               </li>
               <li>
-                <Link className="favorite_button" to={'favorite'}>
+                <Link className="header_favorite" to={'favorite'}>
                   <img src={favoriteButton} alt="" />
                 </Link>
               </li>
