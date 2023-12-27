@@ -1,0 +1,85 @@
+.categories {
+    ul {
+        color: white;
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        cursor: pointer;
+
+        li {
+            padding: 10px 15px;
+            border: solid 1px #E50914;
+            border-radius: 17px;
+        }
+
+        .selected {
+            background-color: #E50914;
+            color: white;
+        }
+    }
+
+    .menu-button {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .categories {
+        position: relative;
+    }
+
+    .menu-button {
+        display: block;
+        font-size: 20px;
+
+        .menu-button:hover {
+            color: #E50914;
+        }
+    }
+
+    .categories ul {
+        display: none;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            width: 30%;
+            text-align: center;
+            margin-right: 0px;
+        }
+    }
+
+    .categories.menu-open .menu-button:hover {
+        color: #E50914;
+    }
+
+    .categories.menu-open ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: fixed;
+        background: black;
+        width: 25%;
+        right: 7%;
+        border-radius: 20px;
+        border: solid 0.1px rgba(203, 203, 203, 0.4117647059);
+        padding: 26px;
+    }
+
+    .categories .menu-button {
+        cursor: pointer;
+        color: #FFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5%;
+
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .categories ul li {
+        width: 90%;
+    }
+}

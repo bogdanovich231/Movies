@@ -1,0 +1,54 @@
+.notfound {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &_title {
+        h1 {
+            font-size: 20em;
+            color: #fff;
+        }
+    }
+
+    &_description {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        p {
+            font-size: 30px;
+            color: #E50914;
+        }
+
+        a {
+            border-radius: 30px;
+            padding: 10px 15px;
+            color: white;
+            background: #E50914;
+
+            &:hover {
+                transform: scale(1.1);
+                background: linear-gradient(135deg, #ff0b03 46.91%, #ffffff);
+                transition: 1s;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .notfound {
+        &_title {
+            h1 {
+                font-size: 12em;
+            }
+        }
+
+        &_description {
+
+            p {
+                font-size: 20px;
+            }
+        }
+    }
+}
