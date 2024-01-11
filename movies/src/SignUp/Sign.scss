@@ -1,0 +1,70 @@
+.form_container {
+    display: flex;
+    justify-content: center;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 35px 25px;
+        border-radius: 20px;
+        width: 420px;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        border: solid 1px #E50914;
+    }
+
+    .title {
+        color: #E50914;
+        font-size: 25px;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .field_container {
+        border-bottom: solid 1px #E50914;
+
+        input {
+            width: 100%;
+            height: 30px;
+            border: none;
+            background-color: #ffffff00;
+            color: #ffffff;
+            font-size: 17px;
+        }
+
+        input::placeholder {
+            color: #FFF;
+        }
+
+        input:focus-visible {
+            outline: none;
+        }
+    }
+
+    .submit {
+        text-align: center;
+
+        button {
+            background-color: #E50914;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 25px;
+            color: white;
+            font-size: 17px;
+        }
+    }
+
+    .auth_issue {
+        text-align: center;
+
+        P {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        a {
+            color: #E50914;
+        }
+    }
+}

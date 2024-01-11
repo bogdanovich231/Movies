@@ -1,0 +1,127 @@
+.product_detailed {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    background: linear-gradient(to right, rgb(0, 0, 0) 35%, rgba(253, 253, 253, 0));
+    margin-top: 5%;
+    margin-bottom: 5%;
+
+    .information {
+        z-index: 20;
+        margin-left: 11%;
+        width: 35%;
+        margin-right: 3%;
+
+        h1 {
+            margin-bottom: 15px;
+        }
+
+        .meta_data_container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 20px;
+            margin-bottom: 15px;
+
+            img {
+                width: 25px;
+            }
+
+            .rating.grey {
+                color: #868D86;
+            }
+
+            .rating.green {
+                color: #0DE509;
+            }
+
+            .release_date,
+            .genres {
+                color: #868D86;
+            }
+        }
+
+        .close_btn {
+            border: none;
+            border-radius: 50%;
+            padding: 10px 15px;
+            color: white;
+            background: red;
+            font-size: 20px;
+        }
+
+        .install_btn {
+            border: none;
+            border-radius: 30px;
+            padding: 10px 15px;
+            color: white;
+            background: red;
+            font-size: 20px;
+        }
+
+        .description {
+            h1 {
+                font-size: 70px;
+            }
+        }
+
+        button {
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.10);
+                background: linear-gradient(135deg, #ff0b03 46.91%, #ffffff);
+                transition: 1s;
+            }
+        }
+
+        .container_button {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    }
+
+    .img {
+        z-index: -1;
+
+
+    }
+
+    .img_backup img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1190px) {
+    .product_detailed {
+        display: flex;
+        flex-direction: column;
+
+        .information {
+            width: 90%;
+            margin-right: 5%;
+            margin-left: 11%;
+
+            .install_btn {
+                padding: 10px;
+            }
+        }
+
+        .img_backup {
+            margin-top: 5%;
+        }
+
+        .trailer {
+            width: 100%;
+            margin-top: 5%;
+
+            iframe {
+                width: 100%;
+            }
+        }
+
+
+    }
+}
