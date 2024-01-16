@@ -1,0 +1,19 @@
+.header {
+  background-color: #eeeeee;
+  padding: 25px;
+
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 10px;
+
+    li {
+      list-style: none;
+
+      a {
+        text-decoration: none;
+        color: black;
+      }
+    }
+  }
+}
